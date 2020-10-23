@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/projectSettingsUpdater.xml
+/contentModel.xml
+/.idea.DNPAssigment1.iml
+/modules.xml
+# Datasource local storage ignored files
+/../../../../../../../../../:\Users\pavli\IdeaProjects\DNP_Assigment1\DNPAssigment1\.idea\.idea.DNPAssigment1\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/

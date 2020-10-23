@@ -1,0 +1,87 @@
+﻿@inject IFamilyService FamilyService;
+@inject IModalService ModalService;
+
+
+@page "/view"
+@using DNPAssigment1.Models
+@using DNPAssigment1.Data
+<div style="padding-bottom: 2%">
+    <input @bind-value="SearchTerm" @bind-value:event="oninput" placeholder="Search">
+    <span class="text-muted ml-2">
+        Showing @FilteredFamilies.Count out of @Families.Count
+    </span>
+</div>
+@if (Families == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else if (!Families.Any())
+{
+    <p>There are no families</p>
+}
+else
+{
+    <table class="table table-striped table-bordered table-hover">
+        <thead >
+        <tr>
+            <th>Family ID</th>
+            <th>Last Name</th>
+            <th>Address</th>
+            <th>Information</th>
+            <AuthorizeView Policy="SecurityLevel2">
+                <th>Remove</th>
+            </AuthorizeView>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var family in FilteredFamilies)
+        {
+            <tr>
+                <th>@family.Id</th>
+                <td>@family.Lastname</td>
+                <td>@family.Address</td>
+                <td>
+                    <button @onclick="@(() => SetSelectedFamily(family))" class="btn btn-outline-dark btn-sm">More info.</button>
+                </td>
+                <AuthorizeView Policy="SecurityLevel2">
+                    <td>
+                        <button @onclick="@(() => RemoveFamily(family.Id))">
+                            <i class="oi oi-trash" style="color:red"/>
+                        </button>
+                    </td>
+                </AuthorizeView>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+
+
+@code {
+    string SearchTerm { get; set; } = "";
+    private IList<Family> Families;
+    IList<Family> FilteredFamilies => Families.Where(i => i.Lastname.ToLower().Contains(SearchTerm.ToLower())).ToList();
+
+    protected async override Task OnInitializedAsync()
+    {
+        Families = FamilyService.GetFamilies();
+    }
+
+    private void SetSelectedFamily(Family family)
+    {
+        FamilyService.setSelectedFamily(family);
+        ModalService.Show<FamilyView>("Family details:");
+    }
+
+    private void RemoveFamily(int familyId)
+    {
+        Family familyToRemove = Families.First(f => f.Id == familyId);
+        FamilyService.RemoveFamily(familyId);
+        Families.Remove(familyToRemove);
+        FilteredFamilies.Remove(familyToRemove);
+    }
+
+}

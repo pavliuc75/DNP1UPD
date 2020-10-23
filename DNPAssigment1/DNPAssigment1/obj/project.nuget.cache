@@ -1,0 +1,25 @@
+{
+  "version": 2,
+  "dgSpecHash": "K5V2fHpacjmm6aZ2rR6H6hW/Fm80eC8+SMwhcmNXp0ZgNMj4njMMbAVcEm2dSlPGuQPsS8kgk+b6cYfXMQeOAA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\pavli\\Desktop\\DNP_1_upd\\DNPAssigment1\\DNPAssigment1\\DNPAssigment1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\pavli\\.nuget\\packages\\blazored.modal\\5.1.0\\blazored.modal.5.1.0.nupkg.sha512",
+    "C:\\Users\\pavli\\.nuget\\packages\\microsoft.aspnetcore.authorization\\3.1.6\\microsoft.aspnetcore.authorization.3.1.6.nupkg.sha512",
+    "C:\\Users\\pavli\\.nuget\\packages\\microsoft.aspnetcore.components\\3.1.6\\microsoft.aspnetcore.components.3.1.6.nupkg.sha512",
+    "C:\\Users\\pavli\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\3.1.6\\microsoft.aspnetcore.components.analyzers.3.1.6.nupkg.sha512",
+    "C:\\Users\\pavli\\.nuget\\packages\\microsoft.aspnetcore.components.forms\\3.1.6\\microsoft.aspnetcore.components.forms.3.1.6.nupkg.sha512",
+    "C:\\Users\\pavli\\.nuget\\packages\\microsoft.aspnetcore.components.web\\3.1.6\\microsoft.aspnetcore.components.web.3.1.6.nupkg.sha512",
+    "C:\\Users\\pavli\\.nuget\\packages\\microsoft.aspnetcore.metadata\\3.1.6\\microsoft.aspnetcore.metadata.3.1.6.nupkg.sha512",
+    "C:\\Users\\pavli\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.1.6\\microsoft.extensions.dependencyinjection.3.1.6.nupkg.sha512",
+    "C:\\Users\\pavli\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.6\\microsoft.extensions.dependencyinjection.abstractions.3.1.6.nupkg.sha512",
+    "C:\\Users\\pavli\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\3.1.6\\microsoft.extensions.logging.abstractions.3.1.6.nupkg.sha512",
+    "C:\\Users\\pavli\\.nuget\\packages\\microsoft.extensions.options\\3.1.6\\microsoft.extensions.options.3.1.6.nupkg.sha512",
+    "C:\\Users\\pavli\\.nuget\\packages\\microsoft.extensions.primitives\\3.1.6\\microsoft.extensions.primitives.3.1.6.nupkg.sha512",
+    "C:\\Users\\pavli\\.nuget\\packages\\microsoft.jsinterop\\3.1.6\\microsoft.jsinterop.3.1.6.nupkg.sha512",
+    "C:\\Users\\pavli\\.nuget\\packages\\microsoft.jsinterop.webassembly\\3.2.1\\microsoft.jsinterop.webassembly.3.2.1.nupkg.sha512",
+    "C:\\Users\\pavli\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512",
+    "C:\\Users\\pavli\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.7\\microsoft.netcore.app.host.win-x64.3.1.7.nupkg.sha512"
+  ],
+  "logs": []
+}

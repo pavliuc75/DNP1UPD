@@ -1,0 +1,58 @@
+@using DNPAssigment1.Models
+<h3>Add adult</h3>
+@* <form> *@
+@*     <div class="form-group"> *@
+@*         <label>Fist name: </label> *@
+@*         <input class="input-group-text" @bind-value="newAdult.FirstName"> *@
+@*     </div> *@
+@*     <div class="form-group"> *@
+@*         <label>Last name: </label> *@
+@*         <input class="input-group-text" @bind-value="newAdult.LastName"> *@
+@*     </div> *@
+@*     <div class="form-group"> *@
+@*         <label>Age: </label> *@
+@*         <input class="input-group-text" @bind-value="newAdult.Age"> *@
+@*     </div> *@
+@*     <div class="form-group"> *@
+@*         <label>ID: </label> *@
+@*         <input class="input-group-text" @bind-value="newAdult.Id"> *@
+@*     </div> *@
+@*     <div class="form-group"> *@
+@*         <label>Choose eye color: </label> *@
+@*         <select @onchange="onEyeColorChange"> *@
+@*             @foreach (var color in eyeColors) *@
+@*             { *@
+@*                 <option value="@color">@color</option> *@
+@*             } *@
+@*         </select> *@
+@*     </div> *@
+@*     <div class="form-group"> *@
+@*         <label>Choose hair color: </label> *@
+@*         <select @onchange="onHairColorChange"> *@
+@*             @foreach (var color in  hairColors) *@
+@*             { *@
+@*                 <option value="@color">@color</option> *@
+@*             } *@
+@*         </select> *@
+@*     </div> *@
+@*     <div class="form-group"> *@
+@*         <label>Choose job: </label> *@
+@*         <select @onchange="onJobChange"> *@
+@*             @foreach (var job in  jobs) *@
+@*             { *@
+@*                 <option value="@job">@job</option> *@
+@*             } *@
+@*         </select> *@
+@*     </div> *@
+@*     <div class="form-group"> *@
+@*         <label>Weigh: </label> *@
+@*         <input class="input-group-text" @bind-value="newAdult.Weight"> *@
+@*     </div> *@
+@*     <button class="btn btn-primary" @onclick="saveAdult">Save child</button> *@
+@* </form> *@
+
+@code{
+    private Child newAdult = new Child();
+
+
+}

@@ -1,0 +1,17 @@
+﻿@page "/SecurityLevel"
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<AuthorizeView>
+    <h3>Hello @context.User.Identity.Name</h3>
+
+    <h5>Your security level is @context.User.FindFirst(claim => claim.Type.Equals("Level")).Value</h5>
+</AuthorizeView>
+
+
+<AuthorizeView Policy="SecurityLevel2">
+    <p>This page is only visiable for Admin ... and is under construction</p>
+</AuthorizeView>
+
+@code {
+    
+}

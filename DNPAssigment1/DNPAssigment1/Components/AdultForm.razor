@@ -1,0 +1,77 @@
+@using DNPAssigment1.Models
+@using DNPAssigment1.Data
+@inject IFamilyService FamilyService;
+<h3>Adult form</h3>
+<form>
+    <div class="form-group">
+        <label>First Name</label>
+        <input class="form-control" placeholder="First Name">
+    </div>
+    <div class="form-group">
+        <label>Last Name</label>
+        <input class="form-control" placeholder="Last Name">
+    </div>
+    <div class="form-group">
+        <label>ID</label>
+        <input class="form-control" placeholder="ID">
+    </div>
+    <div class="form-group">
+        <label>Hair color</label>
+        <select>
+            @foreach (HairColor hairColor in (HairColor[]) Enum.GetValues(typeof(HairColor)))
+            {
+                <option>@hairColor</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Eye color</label>
+        <select>
+            @foreach (EyeColor eyeColor in (EyeColor[]) Enum.GetValues(typeof(EyeColor)))
+            {
+                <option>@eyeColor</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Age</label>
+        <input class="form-control" placeholder="Age">
+    </div>
+    <div class="form-group">
+        <label>Weight</label>
+        <input class="form-control" placeholder="Weight">
+    </div>
+    <div class="form-group">
+        <label>Height</label>
+        <input class="form-control" placeholder="Height">
+    </div>
+    <div class="form-group">
+        <label>Job</label>
+        <select>
+            @foreach (Job job in (Job[]) Enum.GetValues(typeof(Job)))
+            {
+                <option>@job</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Family</label>
+        <select>
+            @foreach (var family in Families)
+            {
+                <option>@family.Adults.First().LastName</option>
+            }
+        </select>
+    </div>
+    <button class="btn btn-outline-dark btn-sm">Add ADULT</button>
+</form>
+
+@code{
+    private IList<Family> Families;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Families = FamilyService.GetFamilies();
+    }
+
+}

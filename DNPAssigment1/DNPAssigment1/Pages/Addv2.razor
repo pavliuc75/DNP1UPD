@@ -1,0 +1,397 @@
+﻿@page "/Addv2"
+@using DNPAssigment1.Data
+@using DNPAssigment1.Models
+@inject IFamilyService FamilyService;
+
+<form>
+<div class="form-row">
+    <div class="form-group col">
+        <label>Choose what needs to be added: </label>
+        <select class="form-control" @bind="selectedAddType" style="background-color: #f7f7f7">
+            <option selected value="family">Family</option>
+            <option value="adult">Adult</option>
+            <option value="child">Child</option>
+            <option value="pet">Pet</option>
+        </select>
+    </div>
+</div>
+
+<hr>
+
+@switch (selectedAddType)
+{
+    case "family":
+    {
+        <form>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Address</label>
+                    <input class="form-control" placeholder="1234 Main St" @bind="familyAddress">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Last name</label>
+                    <input class="form-control" placeholder="Last name" @bind="familyLastname">
+                </div>
+            </div>
+            <button class="btn btn-outline-dark btn-sm" @onclick="addFamily">Add family</button>
+        </form>
+        break;
+    }
+    case "adult":
+    {
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>First name</label>
+                    <input class="form-control" placeholder="First name" @bind="adultFirstname">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Last name</label>
+                    <input class="form-control" placeholder="Last name" @bind="adultLastname">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>ID</label>
+                    <input class="form-control" placeholder="ID number" @bind="adultId">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Hair color</label>
+                    <select class="form-control" @onchange="adultHairColorSelected" style="background-color: #f7f7f7">
+                        @foreach (HairColor hairColor in (HairColor[]) Enum.GetValues(typeof(HairColor)))
+                        {
+                            <option value="@hairColor">@hairColor.ToString()</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Eye color</label>
+                    <select class="form-control" @onchange="adultEyeColorSelected" style="background-color: #f7f7f7">
+                        @foreach (EyeColor eyeColor in (EyeColor[]) Enum.GetValues(typeof(EyeColor)))
+                        {
+                            <option value="@eyeColor">@eyeColor.ToString()</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Age</label>
+                    <input class="form-control" placeholder="Age" @bind="adultAge">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Weight</label>
+                    <input class="form-control" placeholder="Weight (kg)" @bind="adultWeight">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Height</label>
+                    <input class="form-control" placeholder="Height (cm)" @bind="adultHeight">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Job</label>
+                    <select class="form-control" @onchange="adultJobSelected" style="background-color: #f7f7f7">
+                        @foreach (Job job in (Job[]) Enum.GetValues(typeof(Job)))
+                        {
+                            <option value="@job">@job.ToString()</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Family</label>
+                    <select class="form-control" @onchange="adultFamilySelected" style="background-color: #f7f7f7">
+                        @foreach (var family in Families)
+                        {
+                            <option value="@family.Lastname">@family.Lastname</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-outline-dark btn-sm" @onclick="addAdult">Add adult</button>
+        </form>
+        break;
+    }
+    case "child":
+    {
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>First name</label>
+                    <input class="form-control" placeholder="First name" @bind="childFirstname">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Last name</label>
+                    <input class="form-control" placeholder="Last name" @bind="childLastname">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>ID</label>
+                    <input class="form-control" placeholder="ID number" @bind="childId">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Hair color</label>
+                    <select class="form-control" @onchange="childHairColorSelected" style="background-color: #f7f7f7">
+                        @foreach (HairColor hairColor in (HairColor[]) Enum.GetValues(typeof(HairColor)))
+                        {
+                            <option value="@hairColor">@hairColor.ToString()</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Eye color</label>
+                    <select class="form-control" @onchange="childEyeColorSelected" style="background-color: #f7f7f7">
+                        @foreach (EyeColor eyeColor in (EyeColor[]) Enum.GetValues(typeof(EyeColor)))
+                        {
+                            <option value="@eyeColor">@eyeColor.ToString()</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Age</label>
+                    <input class="form-control" placeholder="Age" @bind="childAge">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Weight</label>
+                    <input class="form-control" placeholder="Weight (kg)" @bind="childWeight">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Height</label>
+                    <input class="form-control" placeholder="Height (cm)" @bind="childHeight">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Interests</label>
+                    <select class="form-control" @onchange="childInterestSelected" style="background-color: #f7f7f7">
+                        @foreach (ChildInterest childInterest in (ChildInterest[]) Enum.GetValues(typeof(ChildInterest)))
+                        {
+                            <option value="@childInterest">@childInterest.ToString()</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <button type="button" class="btn btn-outline-dark btn-block" @onclick="addInterestToList">Add</button>
+                    <small class="form-text text-muted">Selected interests:@childInterestListString</small>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Family</label>
+                    <select class="form-control" @onchange="childFamilySelected" style="background-color: #f7f7f7">
+                        @foreach (var family in Families)
+                        {
+                            <option value="@family.Lastname">@family.Lastname</option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </form>
+        <button class="btn btn-outline-dark btn-sm" style="margin-bottom: 1%" @onclick="addChild">Add child</button>
+        break;
+    }
+    case "pet":
+    {
+        <form>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Name</label>
+                    <input class="form-control" placeholder="Name" @bind="petName">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col">
+                    <label>Age</label>
+                    <input class="form-control" placeholder="Age" @bind="petAge">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Species</label>
+                    <select class="form-control" @onchange="petSpeciesSelected" style="background-color: #f7f7f7">
+                        @foreach (PetSpecies petSpecies in (PetSpecies[]) Enum.GetValues(typeof(PetSpecies)))
+                        {
+                            <option value="@petSpecies">@petSpecies.ToString()</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Family</label>
+                    <select class="form-control" @onchange="petFamilySelected" style="background-color: #f7f7f7">
+                        @foreach (var family in Families)
+                        {
+                            <option value="@family.Lastname">@family.Lastname</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <button class="btn btn-outline-dark btn-sm" @onclick="addPet">Add pet</button>
+        </form>
+        break;
+    }
+}
+</form>
+
+
+@code {
+    string selectedAddType { get; set; } = "family"; //default value when page is loaded
+    private IList<Family> Families;
+
+    protected async override Task OnInitializedAsync()
+    {
+        Families = FamilyService.GetFamilies();
+    }
+
+    // family----------------------------------------------------------------------------
+    string familyAddress;
+    string familyLastname;
+
+    public void addFamily()
+    {
+        Family newFamily = new Family();
+        newFamily.Address = familyAddress;
+        newFamily.Lastname = familyLastname;
+        FamilyService.AddFamily(newFamily);
+    }
+
+    // adult----------------------------------------------------------------------------
+    string adultFirstname;
+    string adultLastname;
+    int? adultId;
+    HairColor adultHairColor;
+    EyeColor adultEyeColor;
+    int? adultAge;
+    int? adultWeight;
+    int? adultHeight;
+    Job adultJob;
+    Family adultFamily = new Family();
+
+    void adultHairColorSelected(ChangeEventArgs e)
+    {
+        adultHairColor = Enum.Parse<HairColor>(e.Value.ToString());
+    }
+
+    void adultEyeColorSelected(ChangeEventArgs e)
+    {
+        adultEyeColor = Enum.Parse<EyeColor>(e.Value.ToString());
+    }
+
+    void adultJobSelected(ChangeEventArgs e)
+    {
+        adultJob = Enum.Parse<Job>(e.Value.ToString());
+    }
+
+    void adultFamilySelected(ChangeEventArgs e)
+    {
+        adultFamily = Families.FirstOrDefault(i => i.Lastname.Equals(e.Value.ToString()));
+    }
+
+    public void addAdult()
+    {
+        Adult newAdult = new Adult();
+        newAdult.FirstName = adultFirstname;
+        newAdult.LastName = adultLastname;
+        newAdult.Id = (int) adultId;
+        newAdult.HairColor = adultHairColor;
+        newAdult.EyeColor = adultEyeColor;
+        newAdult.Age = (int) adultAge;
+        newAdult.Weight = (int) adultWeight;
+        newAdult.Height = (int) adultHeight;
+        newAdult.Job = adultJob;
+        FamilyService.GetFamilies().FirstOrDefault(i => i.Lastname.Equals(adultFamily.Lastname)).Adults.Add(newAdult);
+    }
+
+    // child----------------------------------------------------------------------------
+    string childFirstname;
+    string childLastname;
+    int? childId;
+    HairColor childHairColor;
+    EyeColor childEyeColor;
+    int? childAge;
+    int? childWeight;
+    int? childHeight;
+    ChildInterest childInterest;
+    List<ChildInterest> childInterestList = new List<ChildInterest>();
+    string childInterestListString;
+    Family childFamily = new Family();
+
+    void childHairColorSelected(ChangeEventArgs e)
+    {
+        childHairColor = Enum.Parse<HairColor>(e.Value.ToString());
+    }
+
+    void childEyeColorSelected(ChangeEventArgs e)
+    {
+        childEyeColor = Enum.Parse<EyeColor>(e.Value.ToString());
+    }
+
+    void childInterestSelected(ChangeEventArgs e)
+    {
+        childInterest = Enum.Parse<ChildInterest>(e.Value.ToString());
+    }
+
+    void addInterestToList()
+    {
+        childInterestListString = childInterestListString + " " + childInterest.ToString();
+        childInterestList.Add(childInterest);
+    }
+
+    void childFamilySelected(ChangeEventArgs e)
+    {
+        childFamily = Families.FirstOrDefault(i => i.Lastname.Equals(e.Value.ToString()));
+    }
+
+
+    public void addChild()
+    {
+        Child newChild = new Child();
+        newChild.FirstName = childFirstname;
+        newChild.LastName = childLastname;
+        newChild.Id = (int) childId;
+        newChild.HairColor = childHairColor;
+        newChild.EyeColor = childEyeColor;
+        newChild.Age = (int) childAge;
+        newChild.Weight = (int) childWeight;
+        newChild.Height = (int) childHeight;
+        newChild.Interests = childInterestList;
+        FamilyService.GetFamilies().FirstOrDefault(i => i.Lastname.Equals(childFamily.Lastname)).Children.Add(newChild);
+    }
+
+    //pet---------------------------------------------------------------------------------------------------------------------
+    PetSpecies petSpecies;
+    string petName;
+    int? petAge;
+    Family petFamily = new Family();
+
+    void petSpeciesSelected(ChangeEventArgs e)
+    {
+        petSpecies = Enum.Parse<PetSpecies>(e.Value.ToString());
+    }
+
+    void petFamilySelected(ChangeEventArgs e)
+    {
+        petFamily = Families.FirstOrDefault(i => i.Lastname.Equals(e.Value.ToString()));
+    }
+
+    void addPet()
+    {
+        Pet newPet = new Pet();
+        newPet.Species = petSpecies;
+        newPet.Name = petName;
+        newPet.Age = (int) petAge;
+        FamilyService.GetFamilies().FirstOrDefault(i => i.Lastname.Equals(petFamily.Lastname)).Pets.Add(newPet);
+    }
+
+
+}

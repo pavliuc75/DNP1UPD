@@ -1,0 +1,43 @@
+﻿@using DNPAssigment1.Data
+@inherits LayoutComponentBase
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+
+<AuthorizeView>
+    <Authorized>
+        <div class="sidebar">
+            <NavMenu/>
+        </div>
+                
+        <div class="main">
+            <div class="top-row px-4" style="background-color: #4C4C4C" >
+                <a class="btn btn-light btn-sm" href="" @onclick="PerformLogout">
+                    Log out
+                </a>
+            </div>
+            <div class="content px-4">
+                @Body
+            </div>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="container">
+            <Login/>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+@code {
+    public async Task PerformLogout()
+    {
+        try
+        {
+            ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
+            NavigationManager.NavigateTo("/");
+        }
+        catch (Exception e)
+        {
+        }
+    }
+}

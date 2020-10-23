@@ -1,0 +1,34 @@
+@using DNPAssigment1.Models
+@using Microsoft.AspNetCore.Mvc.ModelBinding
+<h3>Add pet</h3>
+
+<form>
+    <div class="form-group">
+        <label>Choose Specie: </label>
+@*         <select @bind-Value="pet.Species"> *@
+@*             @foreach (var specie in Enum.GetValues(typeof(PetSpecies))) *@
+@*             {  *@
+@*                 <option value="@specie">@specie</option> *@
+@*             } *@
+@*         </select> *@
+    </div>
+    <div class="form-group">
+        <label>Name: </label>
+        <input class="input-group-text" @bind-value="pet.Name">
+    </div>
+    <div class="form-group">
+        <label>Age: </label>
+        <input class="input-group-text" @bind-value="pet.Age">
+    </div>
+    <button class="btn btn-primary" @onclick="savePet">Save pet</button>
+</form>
+
+@code{
+    Pet pet = new Pet();
+
+    private void savePet()
+    {
+        //
+    }
+
+}
