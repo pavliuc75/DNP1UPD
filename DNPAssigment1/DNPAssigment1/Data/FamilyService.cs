@@ -214,12 +214,12 @@ namespace DNPAssigment1.Data
             families = fm.ToList();
         }
 
-        public async Task<Family> getSelectedFamily()
+        public Family getSelectedFamily()
         {
             return this.selectedFamily;
         }
 
-        public async Task setSelectedFamily(Family family)
+        public void setSelectedFamily(Family family)
         {
             this.selectedFamily = family;
         }

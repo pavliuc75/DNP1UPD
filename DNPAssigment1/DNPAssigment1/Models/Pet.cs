@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace DNPAssigment1.Models
 {
@@ -6,12 +7,10 @@ namespace DNPAssigment1.Models
     {
         public PetSpecies Species;
 
-        [Required]
-        [MaxLength(128, ErrorMessage = "The value should be 1-128 symbols")]
+        [JsonPropertyName("Name")]
         public string Name { get; set; }
 
-        [Required]
-        [Range(0, 50, ErrorMessage = "The value should be between 0-50")]
+        [JsonPropertyName("Age")]
         public int Age { get; set; }
     }
 }

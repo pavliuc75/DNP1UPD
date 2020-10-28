@@ -15,8 +15,8 @@ namespace DNPAssigment1.Data
 
         Task Update(Family family);
 
-        Task<Family> getSelectedFamily();
+        Family getSelectedFamily();
 
-        Task setSelectedFamily(Family family);
+        void setSelectedFamily(Family family);
     }
 }

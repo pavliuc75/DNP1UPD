@@ -7,9 +7,12 @@
 @using DNPAssigment1.Data
 <div style="padding-bottom: 2%">
     <input @bind-value="SearchTerm" @bind-value:event="oninput" placeholder="Search">
-    <span class="text-muted ml-2">
-        Showing @FilteredFamilies.Count out of @Families.Count
-    </span>
+    @if (Families != null)
+    {
+        <span class="text-muted ml-2">
+            Showing @FilteredFamilies.Count out of @Families.Count
+        </span>
+    }
 </div>
 @if (Families == null)
 {
@@ -63,11 +66,12 @@ else
 @code {
     string SearchTerm { get; set; } = "";
     private IList<Family> Families;
-    IList<Family> FilteredFamilies => Families.Where(i => i.Lastname.ToLower().Contains(SearchTerm.ToLower())).ToList();
+    private IList<Family> FilteredFamilies;
 
     protected async override Task OnInitializedAsync()
     {
         Families = await FamilyService.GetFamilies();
+        FilteredFamilies = Families; //.Where(i => i.Lastname.ToLower().Contains(SearchTerm.ToLower())).ToList();
     }
 
     private void SetSelectedFamily(Family family)

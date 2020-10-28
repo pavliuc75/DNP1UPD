@@ -1,4 +1,6 @@
-﻿namespace DNPAssigment1.Models
+﻿using System.Text.Json.Serialization;
+
+namespace DNPAssigment1.Models
 {
     public enum ChildInterest
     {
