@@ -1,21 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using DNPAssigment1.Models;
 
 namespace DNPAssigment1.Data
 {
     public interface IFamilyService
     {
-        IList<Family> GetFamilies();
+        Task<IList<Family>> GetFamilies();
 
-        void AddFamily(Family family);
+        Task AddFamily(Family family);
 
-        void RemoveFamily(int familyId);
+        Task RemoveFamily(int familyId);
 
-        void Update(Family family);
+        Task Update(Family family);
 
-        Family getSelectedFamily();
+        Task<Family> getSelectedFamily();
 
-        void setSelectedFamily(Family family);
+        Task setSelectedFamily(Family family);
     }
 }

@@ -250,7 +250,7 @@
 
     protected async override Task OnInitializedAsync()
     {
-        Families = FamilyService.GetFamilies();
+        Families = await FamilyService.GetFamilies();
     }
 
     // family----------------------------------------------------------------------------
@@ -297,7 +297,7 @@
         adultFamily = Families.FirstOrDefault(i => i.Lastname.Equals(e.Value.ToString()));
     }
 
-    public void addAdult()
+    public async void addAdult()
     {
         Adult newAdult = new Adult();
         newAdult.FirstName = adultFirstname;
@@ -309,7 +309,8 @@
         newAdult.Weight = (int) adultWeight;
         newAdult.Height = (int) adultHeight;
         newAdult.Job = adultJob;
-        FamilyService.GetFamilies().FirstOrDefault(i => i.Lastname.Equals(adultFamily.Lastname)).Adults.Add(newAdult);
+        var familes = await FamilyService.GetFamilies();
+        familes.FirstOrDefault(i => i.Lastname.Equals(adultFamily.Lastname)).Adults.Add(newAdult);
     }
 
     // child----------------------------------------------------------------------------
@@ -353,7 +354,7 @@
     }
 
 
-    public void addChild()
+    public async void addChild()
     {
         Child newChild = new Child();
         newChild.FirstName = childFirstname;
@@ -365,7 +366,8 @@
         newChild.Weight = (int) childWeight;
         newChild.Height = (int) childHeight;
         newChild.Interests = childInterestList;
-        FamilyService.GetFamilies().FirstOrDefault(i => i.Lastname.Equals(childFamily.Lastname)).Children.Add(newChild);
+        var families = await FamilyService.GetFamilies();
+        families.FirstOrDefault(i => i.Lastname.Equals(childFamily.Lastname)).Children.Add(newChild);
     }
 
     //pet---------------------------------------------------------------------------------------------------------------------
@@ -385,13 +387,14 @@
         petFamily = Families.FirstOrDefault(i => i.Lastname.Equals(e.Value.ToString()));
     }
 
-    void addPet()
+    async void addPet()
     {
         Pet newPet = new Pet();
         newPet.Name = petName;
         newPet.Age = (int) petAge;
         newPet.Species = petSpecies;
-        FamilyService.GetFamilies().FirstOrDefault(i => i.Lastname.Equals(petFamily.Lastname)).Pets.Add(newPet);
+        var families = await FamilyService.GetFamilies();
+        families.FirstOrDefault(i => i.Lastname.Equals(petFamily.Lastname)).Pets.Add(newPet);
     }
 
 

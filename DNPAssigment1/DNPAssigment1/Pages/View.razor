@@ -67,7 +67,7 @@ else
 
     protected async override Task OnInitializedAsync()
     {
-        Families = FamilyService.GetFamilies();
+        Families = await FamilyService.GetFamilies();
     }
 
     private void SetSelectedFamily(Family family)

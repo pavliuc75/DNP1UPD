@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Threading.Tasks;
 using DNPAssigment1.Models;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
 
@@ -28,12 +29,12 @@ namespace DNPAssigment1.Data
             }
         }
         
-        public IList<Family> GetFamilies()
+        public async Task<IList<Family>> GetFamilies()
         {
             return this.families;
         }
 
-        public void AddFamily(Family family)
+        public async Task AddFamily(Family family)
         {
             int max = families.Max(family => family.Id);
             family.Id = (++max);
@@ -41,14 +42,14 @@ namespace DNPAssigment1.Data
             WriteFamiliesToFile();
         }
 
-        public void RemoveFamily(int familyId)
+        public async Task RemoveFamily(int familyId)
         {
             Family toRemove = families.First(f => f.Id == familyId);
             families.Remove(toRemove);
             WriteFamiliesToFile();
         }
 
-        public void Update(Family family)
+        public async Task Update(Family family)
         {
             Family toUpdate = families.First(f => f.Id == family.Id);
             toUpdate = family;
@@ -213,12 +214,12 @@ namespace DNPAssigment1.Data
             families = fm.ToList();
         }
 
-        public Family getSelectedFamily()
+        public async Task<Family> getSelectedFamily()
         {
             return this.selectedFamily;
         }
 
-        public void setSelectedFamily(Family family)
+        public async Task setSelectedFamily(Family family)
         {
             this.selectedFamily = family;
         }

@@ -139,7 +139,7 @@ else
 
     protected async override Task OnInitializedAsync()
     {
-        selectedFam = FamilyService.getSelectedFamily();
+        selectedFam = await FamilyService.getSelectedFamily();
     }
 
 }
