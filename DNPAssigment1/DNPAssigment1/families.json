@@ -1,1 +1,247 @@
-[{"Address":"Downing street 5, Boston","Lastname":"Dean","Adults":[{"Job":8,"FirstName":"Mike","LastName":"Dean","Id":1,"HairColor":0,"EyeColor":0,"Age":34,"Weight":60,"Height":170},{"Job":16,"FirstName":"Doraty","LastName":"Dean","Id":2,"HairColor":6,"EyeColor":4,"Age":35,"Weight":55,"Height":167}],"Children":[{"Interests":[0,9],"Pets":[{"Name":"Chapie","Age":3}],"FirstName":"Tom","LastName":"Dean","Id":1,"HairColor":3,"EyeColor":1,"Age":12,"Weight":45,"Height":140}],"Pets":[{"Name":"Chapie","Age":3}],"Id":1},{"Address":"Brown street 12, New York","Lastname":"Green","Adults":[{"Job":12,"FirstName":"Luke","LastName":"Green","Id":3,"HairColor":0,"EyeColor":4,"Age":45,"Weight":87,"Height":185},{"Job":20,"FirstName":"Lucy","LastName":"Green","Id":4,"HairColor":5,"EyeColor":5,"Age":39,"Weight":64,"Height":178}],"Children":[{"Interests":[0,9],"Pets":[{"Name":"Braddy","Age":3}],"FirstName":"Mike","LastName":"Green","Id":2,"HairColor":6,"EyeColor":1,"Age":17,"Weight":75,"Height":182}],"Pets":[{"Name":"Braddy","Age":3}],"Id":2},{"Address":"UNKNOWN","Lastname":"EF59K","Adults":[{"Job":0,"FirstName":"kkk","LastName":"kkk","Id":55,"HairColor":0,"EyeColor":0,"Age":55,"Weight":55,"Height":0},{"Job":0,"FirstName":"das","LastName":"asa","Id":1110,"HairColor":0,"EyeColor":0,"Age":0,"Weight":22,"Height":0}],"Children":[{"Interests":[],"Pets":[],"FirstName":"dsa","LastName":"dsadsa","Id":22,"HairColor":0,"EyeColor":0,"Age":22,"Weight":22,"Height":0}],"Pets":[{"Name":"dsadas","Age":550}],"Id":3},{"Address":"Smedegade","Lastname":"3PBJJ","Adults":[],"Children":[],"Pets":[],"Id":4},{"Address":"SDFJLsDJK:F","Lastname":"DSFLSJKL","Adults":[{"Job":0,"FirstName":"DFLKSJD","LastName":"SDFsdf","Id":120,"HairColor":0,"EyeColor":0,"Age":120,"Weight":10,"Height":0}],"Children":[],"Pets":[],"Id":5},{"Address":"C","Lastname":"C","Adults":[{"Job":19,"FirstName":"Jack","LastName":"C","Id":123456789,"HairColor":1,"EyeColor":3,"Age":55,"Weight":333,"Height":0}],"Children":[],"Pets":[{"Name":"Charlie","Age":5}],"Id":6},{"Address":"yy","Lastname":"yy","Adults":[],"Children":[{"Interests":[0,9],"Pets":[],"FirstName":"Dude","LastName":"dude","Id":55,"HairColor":0,"EyeColor":0,"Age":55,"Weight":55,"Height":55}],"Pets":[{"Name":"yy","Age":22}],"Id":10},{"Address":"test","Lastname":"test","Adults":[],"Children":[],"Pets":[],"Id":11}]
+[
+  {
+    "Address": "Downing street 5, Boston",
+    "Lastname": "Dean",
+    "Adults": [
+      {
+        "Job": 8,
+        "FirstName": "Mike",
+        "LastName": "Dean",
+        "Id": 1,
+        "HairColor": 0,
+        "EyeColor": 0,
+        "Age": 34,
+        "Weight": 60,
+        "Height": 170
+      },
+      {
+        "Job": 16,
+        "FirstName": "Doraty",
+        "LastName": "Dean",
+        "Id": 2,
+        "HairColor": 6,
+        "EyeColor": 4,
+        "Age": 35,
+        "Weight": 55,
+        "Height": 167
+      }
+    ],
+    "Children": [
+      {
+        "Interests": [
+          0,
+          9
+        ],
+        "Pets": [
+          {
+            "Name": "Chapie",
+            "Age": 3
+          }
+        ],
+        "FirstName": "Tom",
+        "LastName": "Dean",
+        "Id": 1,
+        "HairColor": 3,
+        "EyeColor": 1,
+        "Age": 12,
+        "Weight": 45,
+        "Height": 140
+      }
+    ],
+    "Pets": [
+      {
+        "Name": "Chapie",
+        "Age": 3
+      }
+    ],
+    "Id": 1
+  },
+  {
+    "Address": "Brown street 12, New York",
+    "Lastname": "Green",
+    "Adults": [
+      {
+        "Job": 12,
+        "FirstName": "Luke",
+        "LastName": "Green",
+        "Id": 3,
+        "HairColor": 0,
+        "EyeColor": 4,
+        "Age": 45,
+        "Weight": 87,
+        "Height": 185
+      },
+      {
+        "Job": 20,
+        "FirstName": "Lucy",
+        "LastName": "Green",
+        "Id": 4,
+        "HairColor": 5,
+        "EyeColor": 5,
+        "Age": 39,
+        "Weight": 64,
+        "Height": 178
+      }
+    ],
+    "Children": [
+      {
+        "Interests": [
+          0,
+          9
+        ],
+        "Pets": [
+          {
+            "Name": "Braddy",
+            "Age": 3
+          }
+        ],
+        "FirstName": "Mike",
+        "LastName": "Green",
+        "Id": 2,
+        "HairColor": 6,
+        "EyeColor": 1,
+        "Age": 17,
+        "Weight": 75,
+        "Height": 182
+      }
+    ],
+    "Pets": [
+      {
+        "Name": "Braddy",
+        "Age": 3
+      }
+    ],
+    "Id": 2
+  },
+  {
+    "Address": "UNKNOWN",
+    "Lastname": "EF59K",
+    "Adults": [
+      {
+        "Job": 0,
+        "FirstName": "kkk",
+        "LastName": "kkk",
+        "Id": 55,
+        "HairColor": 0,
+        "EyeColor": 0,
+        "Age": 55,
+        "Weight": 55,
+        "Height": 0
+      },
+      {
+        "Job": 0,
+        "FirstName": "das",
+        "LastName": "asa",
+        "Id": 1110,
+        "HairColor": 0,
+        "EyeColor": 0,
+        "Age": 0,
+        "Weight": 22,
+        "Height": 0
+      }
+    ],
+    "Children": [
+      {
+        "Interests": [],
+        "Pets": [],
+        "FirstName": "dsa",
+        "LastName": "dsadsa",
+        "Id": 22,
+        "HairColor": 0,
+        "EyeColor": 0,
+        "Age": 22,
+        "Weight": 22,
+        "Height": 0
+      }
+    ],
+    "Pets": [
+      {
+        "Name": "dsadas",
+        "Age": 550
+      }
+    ],
+    "Id": 3
+  },
+  {
+    "Address": "Smedegade",
+    "Lastname": "3PBJJ",
+    "Adults": [],
+    "Children": [],
+    "Pets": [],
+    "Id": 4
+  },
+  {
+    "Address": "SDFJLsDJK:F",
+    "Lastname": "DSFLSJKL",
+    "Adults": [
+      {
+        "Job": 0,
+        "FirstName": "DFLKSJD",
+        "LastName": "SDFsdf",
+        "Id": 120,
+        "HairColor": 0,
+        "EyeColor": 0,
+        "Age": 120,
+        "Weight": 10,
+        "Height": 0
+      }
+    ],
+    "Children": [],
+    "Pets": [],
+    "Id": 5
+  },
+  {
+    "Address": "C",
+    "Lastname": "C",
+    "Adults": [
+      {
+        "Job": 19,
+        "FirstName": "Jack",
+        "LastName": "C",
+        "Id": 123456789,
+        "HairColor": 1,
+        "EyeColor": 3,
+        "Age": 55,
+        "Weight": 333,
+        "Height": 0
+      }
+    ],
+    "Children": [],
+    "Pets": [
+      {
+        "Name": "Charlie",
+        "Age": 5
+      }
+    ],
+    "Id": 6
+  },
+  {
+    "Address": "yy",
+    "Lastname": "yy",
+    "Adults": [],
+    "Children": [
+      {
+        "Interests": [
+          0,
+          9
+        ],
+        "Pets": [],
+        "FirstName": "Dude",
+        "LastName": "dude",
+        "Id": 55,
+        "HairColor": 0,
+        "EyeColor": 0,
+        "Age": 55,
+        "Weight": 55,
+        "Height": 55
+      }
+    ],
+    "Pets": [
+      {
+        "Name": "yy",
+        "Age": 22
+      }
+    ],
+    "Id": 10
+  }
+]

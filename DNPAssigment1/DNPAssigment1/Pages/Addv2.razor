@@ -374,6 +374,7 @@
     int? petAge;
     Family petFamily = new Family();
 
+
     void petSpeciesSelected(ChangeEventArgs e)
     {
         petSpecies = Enum.Parse<PetSpecies>(e.Value.ToString());
@@ -387,9 +388,9 @@
     void addPet()
     {
         Pet newPet = new Pet();
-        newPet.Species = petSpecies;
         newPet.Name = petName;
         newPet.Age = (int) petAge;
+        newPet.Species = petSpecies;
         FamilyService.GetFamilies().FirstOrDefault(i => i.Lastname.Equals(petFamily.Lastname)).Pets.Add(newPet);
     }
 
