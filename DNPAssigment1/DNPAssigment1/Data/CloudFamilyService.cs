@@ -16,12 +16,7 @@ namespace DNPAssigment1.Data
         {
             HttpClient client = new HttpClient();
             string message = await client.GetStringAsync("http://dnp.metamate.me/Families");
-            Console.WriteLine(message);
             List<Family> result = JsonSerializer.Deserialize<List<Family>>(message);
-            foreach (var family in result)
-            {
-                Console.WriteLine(family.StreetName);
-            }
             return result;
         }
 
@@ -44,7 +39,7 @@ namespace DNPAssigment1.Data
         {
             HttpClient client = new HttpClient();
             HttpResponseMessage response =
-                await client.DeleteAsync("http://dnp.metamate.me/Families/" + familyId.ToString());
+                await client.DeleteAsync("http://dnp.metamate.me/Families/" + familyId);
             Console.WriteLine(response.ToString());
         }
 

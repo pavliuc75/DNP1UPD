@@ -6,8 +6,11 @@
 @using DNPAssigment1.Models
 @using DNPAssigment1.Data
 @using global::Models
+@using System.Data.SqlTypes
+@using Microsoft.AspNetCore.Mvc.Formatters
 <div style="padding-bottom: 2%">
-    <input @bind-value="SearchTerm" @bind-value:event="oninput" placeholder="Search">
+    <input value="@SearchTerm" @oninput="@((ChangeEventArgs __e) => FilterFamilies(
+                                              __e.Value.ToString()))" placeholder="Search">
     @if (Families != null)
     {
         <span class="text-muted ml-2">
@@ -30,8 +33,8 @@ else
     <table class="table table-striped table-bordered table-hover">
         <thead >
         <tr>
-            <th>Family ID</th>
-            <th>Address</th>
+            <th>Street Name</th>
+            <th>House number</th>
             <th>Information</th>
             <AuthorizeView Policy="SecurityLevel2">
                 <th>Remove</th>
@@ -39,39 +42,44 @@ else
         </tr>
         </thead>
         <tbody>
-        @foreach (var family in FilteredFamilies)
+        @if (FilteredFamilies != null)
         {
-            <tr>
-                <th>@family.Id</th>
-                <td>@family.StreetName</td>
-                <td>@family.HouseNumber</td>
-                <td>
-                    <button @onclick="@(() => SetSelectedFamily(family))" class="btn btn-outline-dark btn-sm">More info.</button>
-                </td>
-                <AuthorizeView Policy="SecurityLevel2">
+            @foreach (var family in FilteredFamilies)
+            {
+                <tr>
+                    <td>@family.StreetName</td>
+                    <td>@family.HouseNumber</td>
                     <td>
-                        <button @onclick="@(() => RemoveFamily(family.Id))">
-                            <i class="oi oi-trash" style="color:red"/>
-                        </button>
+                        <button @onclick="@(() => SetSelectedFamily(family))" class="btn btn-outline-dark btn-sm">More info.</button>
                     </td>
-                </AuthorizeView>
-            </tr>
+                    <AuthorizeView Policy="SecurityLevel2">
+                        <td>
+                            <button @onclick="@(() => RemoveFamily(family.Id))">
+                                <i class="oi oi-trash" style="color:red"/>
+                            </button>
+                        </td>
+                    </AuthorizeView>
+                </tr>
+            }
+        }
+        else
+        {
+            <p>There are no families</p>
         }
         </tbody>
     </table>
-}
-
-
+};
 
 @code {
-    string SearchTerm { get; set; } = "";
+    string SearchTerm { get; set; }
     private IList<Family> Families;
-    private IList<Family> FilteredFamilies;
+    IList<Family> FilteredFamilies;// => Families != null ? 
+     //   Families.Where(i => i.Adults.First().LastName.ToLower().Contains(SearchTerm.ToLower())).ToList() : null;
 
     protected async override Task OnInitializedAsync()
     {
         Families = await FamilyService.GetFamilies();
-        FilteredFamilies = Families; //.Where(i => i.Lastname.ToLower().Contains(SearchTerm.ToLower())).ToList();
+        FilteredFamilies = Families;
     }
 
     private void SetSelectedFamily(Family family)
@@ -88,4 +96,8 @@ else
         FilteredFamilies.Remove(familyToRemove);
     }
 
+    private void FilterFamilies(string searchItem)
+    {
+        FilteredFamilies = Families.Where(i => i.StreetName.ToLower().Contains(searchItem.ToLower())).ToList();
+    }
 }
