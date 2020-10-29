@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DNPAssigment1.Models;
+using Models;
 
 namespace DNPAssigment1.Data
 {

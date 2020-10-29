@@ -3,16 +3,24 @@
 @page "/familyView"
 @using DNPAssigment1.Models
 @using DNPAssigment1.Data
-<div class="form-inline">
+@using global::Models
+<!--<div class="form-inline">
     <label>Last name: </label>
     <label  class="ml-2">
-        <b>@selectedFam.Lastname</b>
+        
+    </label>
+</div>-->
+<div class="form-inline">
+    <label>StreetName: </label>
+    <label class="ml-2">
+        <b>@selectedFam.StreetName</b>
     </label>
 </div>
+<br>
 <div class="form-inline">
-    <label>Address: </label>
+    <label>HouseNumber: </label>
     <label class="ml-2">
-        <b>@selectedFam.Address</b>
+        <b>@selectedFam.HouseNumber</b>
     </label>
 </div>
 <br>
@@ -53,7 +61,7 @@ else
                 <td>@adult.Age</td>
                 <td>@adult.Weight</td>
                 <td>@adult.Height</td>
-                <td>@adult.Job</td>
+                <td>@adult.JobTitle</td>
             </tr>
         }
         </tbody>
@@ -96,7 +104,6 @@ else
                 <td>@child.Age</td>
                 <td>@child.Weight</td>
                 <td>@child.Height</td>
-                <td>@string.Join(" ", child.Interests.ToArray())</td>
             </tr>
         }
         </tbody>

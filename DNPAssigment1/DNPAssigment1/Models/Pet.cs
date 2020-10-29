@@ -1,16 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace DNPAssigment1.Models
-{
-    public class Pet
-    {
-        public PetSpecies Species;
-
-        [JsonPropertyName("Name")]
+namespace Models {
+    public class Pet {
+        [JsonPropertyName("id")]
+        public int Id { get; set; }
+        [Required]
+        [JsonPropertyName("species")]
+        public string Species { get; set; }
+        [Required]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
-
-        [JsonPropertyName("Age")]
+        [Required]
+        [JsonPropertyName("age")]
         public int Age { get; set; }
     }
 }

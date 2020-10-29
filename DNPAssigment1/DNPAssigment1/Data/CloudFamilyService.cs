@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using DNPAssigment1.Models;
+using Models;
 
 namespace DNPAssigment1.Data
 {
@@ -19,7 +20,7 @@ namespace DNPAssigment1.Data
             List<Family> result = JsonSerializer.Deserialize<List<Family>>(message);
             foreach (var family in result)
             {
-                Console.WriteLine(family.Id);
+                Console.WriteLine(family.StreetName);
             }
             return result;
         }

@@ -5,6 +5,7 @@
 @page "/view"
 @using DNPAssigment1.Models
 @using DNPAssigment1.Data
+@using global::Models
 <div style="padding-bottom: 2%">
     <input @bind-value="SearchTerm" @bind-value:event="oninput" placeholder="Search">
     @if (Families != null)
@@ -30,7 +31,6 @@ else
         <thead >
         <tr>
             <th>Family ID</th>
-            <th>Last Name</th>
             <th>Address</th>
             <th>Information</th>
             <AuthorizeView Policy="SecurityLevel2">
@@ -43,8 +43,8 @@ else
         {
             <tr>
                 <th>@family.Id</th>
-                <td>@family.Lastname</td>
-                <td>@family.Address</td>
+                <td>@family.StreetName</td>
+                <td>@family.HouseNumber</td>
                 <td>
                     <button @onclick="@(() => SetSelectedFamily(family))" class="btn btn-outline-dark btn-sm">More info.</button>
                 </td>

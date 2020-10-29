@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using DNPAssigment1.Models;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
+using Models;
 
 namespace DNPAssigment1.Data
 {
@@ -19,7 +20,7 @@ namespace DNPAssigment1.Data
         {
             if (!File.Exists(familyFile))
             {
-                Seed();
+                //Seed();
                 WriteFamiliesToFile();
             }
             else
@@ -61,6 +62,7 @@ namespace DNPAssigment1.Data
             string productAsJson = JsonSerializer.Serialize(families);
             File.WriteAllText(familyFile,productAsJson);
         }
+        /*
         private void Seed()
         {
             Family[] fm =
@@ -107,7 +109,7 @@ namespace DNPAssigment1.Data
                             HairColor = HairColor.Blond,
                             Height = 170,
                             Id = 1,
-                            Job = Job.Astronaut,
+                            Job = Job.Astronaut.ToString(),
                             LastName = "Dean",
                             Weight = 60
                         },
@@ -119,7 +121,7 @@ namespace DNPAssigment1.Data
                             HairColor = HairColor.Blue,
                             Height = 167,
                             Id = 2,
-                            Job = Job.Waitress,
+                            Job = Job.Waitress.ToString(),
                             LastName = "Dean",
                             Weight = 55
                         }
@@ -134,7 +136,7 @@ namespace DNPAssigment1.Data
                             Species = PetSpecies.Dog
                         }
                     }.ToList(),
-                    Lastname = "Dean",
+                    //Lastname = "Dean",
                     Address = "Downing street 5, Boston",
                     Id = 1
                 },
@@ -179,7 +181,7 @@ namespace DNPAssigment1.Data
                             HairColor = HairColor.Blond,
                             Height = 185,
                             Id = 3,
-                            Job = Job.Chef,
+                            Job = Job.Chef.ToString(),
                             LastName = "Green",
                             Weight = 87
                         },
@@ -191,7 +193,7 @@ namespace DNPAssigment1.Data
                             HairColor = HairColor.Grey,
                             Height = 178,
                             Id = 4,
-                            Job = Job.Chemist,
+                            Job = Job.Chemist.ToString(),
                             LastName = "Green",
                             Weight = 64
                         }
@@ -206,13 +208,14 @@ namespace DNPAssigment1.Data
                             Species = PetSpecies.Hamster
                         }
                     }.ToList(),
-                    Lastname = "Green",
+                    //Lastname = "Green",
                     Address = "Brown street 12, New York",
                     Id = 2
                 }
             };
             families = fm.ToList();
-        }
+        }*/
+        
 
         public Family getSelectedFamily()
         {
