@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
- using DNPAssigment1.Models;
+using System.Threading.Tasks;
+using DNPAssigment1.Models;
 
 
 namespace DNPAssigment1.Data
@@ -31,7 +32,7 @@ namespace DNPAssigment1.Data
             }.ToList();
         }
 
-        public User ValidateUser(string userName, string password)
+        public async Task<User> ValidateUserAsync(string userName, string password)
         {
             User first = users.FirstOrDefault(user => user.UserName.Equals(userName
             ));

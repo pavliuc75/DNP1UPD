@@ -1,9 +1,10 @@
-﻿using DNPAssigment1.Models;
+﻿using System.Threading.Tasks;
+using DNPAssigment1.Models;
 
  namespace DNPAssigment1.Data
 {
     public interface IUserService
     {
-        User ValidateUser(string userName, string password);
+        Task<User> ValidateUserAsync(string userName, string password);
     }
 }
