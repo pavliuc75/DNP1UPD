@@ -45,7 +45,7 @@ namespace DNPAssigment1.Data
             return await Task.FromResult(new AuthenticationState(cachedClaimsPrincipal));
         }
 
-        public async void ValidateLogin(string username, string password)
+        public async Task ValidateLogin(string username, string password)
         {
             Console.WriteLine("Validating log in");
             if (string.IsNullOrEmpty(username)) throw new Exception("Enter username");
@@ -63,7 +63,7 @@ namespace DNPAssigment1.Data
             }
             catch (Exception e)
             {
-                throw e;
+                Console.WriteLine(e.StackTrace);
             }
             NotifyAuthenticationStateChanged(
                 Task.FromResult(new AuthenticationState(new ClaimsPrincipal(identity))));

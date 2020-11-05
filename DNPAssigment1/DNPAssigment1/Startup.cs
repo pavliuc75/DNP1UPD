@@ -32,7 +32,7 @@ namespace DNPAssigment1
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<IFamilyService, CloudFamilyService>();
-            services.AddScoped<IUserService, InMemoryUserService>();
+            services.AddScoped<IUserService, CloudUserService>();
             services.AddBlazoredModal();
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             services.AddAuthorization(option =>
