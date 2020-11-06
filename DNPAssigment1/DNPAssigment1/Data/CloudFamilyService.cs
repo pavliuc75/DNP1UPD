@@ -12,10 +12,11 @@ namespace DNPAssigment1.Data
     public class CloudFamilyService : IFamilyService
     {
         public Family SelectedFamily;
+
         public async Task<IList<Family>> GetFamilies()
         {
             HttpClient client = new HttpClient();
-            string message = await client.GetStringAsync("http://dnp.metamate.me/Families");
+            string message = await client.GetStringAsync("http://localhost:8003/Families");
             List<Family> result = JsonSerializer.Deserialize<List<Family>>(message);
             return result;
         }
@@ -24,15 +25,14 @@ namespace DNPAssigment1.Data
         {
             HttpClient client = new HttpClient();
             string familyToSerialize = JsonSerializer.Serialize(family);
-            
+            Console.WriteLine(familyToSerialize);
             StringContent stringContent = new StringContent(
                 familyToSerialize,
                 Encoding.UTF8,
                 "application/json"
-                );
-
+            );
             HttpResponseMessage response = await client.PostAsync("http://dnp.metamate.me/Families", stringContent);
-            Console.WriteLine(response.StatusCode);
+            Console.WriteLine(response.ToString());
         }
 
         public async Task RemoveFamily(int familyId)
@@ -47,12 +47,12 @@ namespace DNPAssigment1.Data
         {
             HttpClient client = new HttpClient();
             string serializedFamily = JsonSerializer.Serialize(family);
-            
+
             StringContent stringContent = new StringContent(
                 serializedFamily,
                 Encoding.UTF8,
                 "application/json"
-                );
+            );
             HttpResponseMessage response = await client.PatchAsync("http://dnp.metamate.me/familes", stringContent);
             Console.WriteLine(response);
         }

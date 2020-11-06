@@ -26,14 +26,14 @@
         <form>
             <div class="form-row">
                 <div class="form-group col">
-                    <label>Address</label>
-                    <input class="form-control" placeholder="Street name" @bind="StreetName">
+                    <label>Street name</label>
+                    <input class="form-control" placeholder="Street name" @bind="familyStreetName">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col">
-                    <label>Last name</label>
-                    <input class="form-control" placeholder="House number" @bind="HouseNumber">
+                    <label>House number</label>
+                    <input class="form-control" placeholder="House number" @bind="familyHouseNumber">
                 </div>
             </div>
             <button class="btn btn-outline-dark btn-sm" @onclick="addFamily">Add family</button>
@@ -255,15 +255,15 @@
     }
 
     // family----------------------------------------------------------------------------
-    string StreetName;
-    int HouseNumber;
-    
+    string familyStreetName;
+    int? familyHouseNumber;
+
 
     public void addFamily()
     {
         Family newFamily = new Family();
-        newFamily.HouseNumber = HouseNumber;
-        newFamily.StreetName = StreetName;
+        newFamily.HouseNumber = (int) familyHouseNumber;
+        newFamily.StreetName = familyStreetName;
         FamilyService.AddFamily(newFamily);
     }
 
@@ -296,7 +296,7 @@
 
     void adultFamilySelected(ChangeEventArgs e)
     {
-        adultFamily = Families.FirstOrDefault(i => i.Id == (int)e.Value);
+        adultFamily = Families.FirstOrDefault(i => i.Id == (int) e.Value);
     }
 
     public async void addAdult()
@@ -348,12 +348,12 @@
     void addInterestToList()
     {
         childInterestListString = childInterestListString + " " + _childInterestEnum.ToString();
-        //TODO:childInterestList.Add(new Interest());
-    } 
+    //TODO:childInterestList.Add(new Interest());
+    }
 
     void childFamilySelected(ChangeEventArgs e)
     {
-        childFamily = Families.FirstOrDefault(i => i.Id == (int)e.Value);
+        childFamily = Families.FirstOrDefault(i => i.Id == (int) e.Value);
     }
 
 
@@ -387,7 +387,7 @@
 
     void petFamilySelected(ChangeEventArgs e)
     {
-        petFamily = Families.FirstOrDefault(i => i.Id == (int)e.Value);
+        petFamily = Families.FirstOrDefault(i => i.Id == (int) e.Value);
     }
 
     async void addPet()
