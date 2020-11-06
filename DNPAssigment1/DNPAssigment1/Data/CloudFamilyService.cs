@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using DNPAssigment1.Models;
+using Microsoft.AspNetCore.Mvc;
 using Models;
 
 namespace DNPAssigment1.Data
@@ -16,9 +17,17 @@ namespace DNPAssigment1.Data
         public async Task<IList<Family>> GetFamilies()
         {
             HttpClient client = new HttpClient();
-            string message = await client.GetStringAsync("http://localhost:8003/Families");
-            List<Family> result = JsonSerializer.Deserialize<List<Family>>(message);
-            return result;
+            string message = await client.GetStringAsync("https://localhost:5003/family");
+            if (message.Length == 0)
+            {
+                List<Family> emptyResult = new List<Family>();
+                return emptyResult;
+            }
+            else
+            {
+                List<Family> result = JsonSerializer.Deserialize<List<Family>>(message);
+                return result;
+            }
         }
 
         public async Task AddFamily(Family family)
@@ -31,7 +40,7 @@ namespace DNPAssigment1.Data
                 Encoding.UTF8,
                 "application/json"
             );
-            HttpResponseMessage response = await client.PostAsync("http://dnp.metamate.me/Families", stringContent);
+            HttpResponseMessage response = await client.PostAsync("http://localhost:5003/family", stringContent);
             Console.WriteLine(response.ToString());
         }
 
@@ -39,7 +48,7 @@ namespace DNPAssigment1.Data
         {
             HttpClient client = new HttpClient();
             HttpResponseMessage response =
-                await client.DeleteAsync("http://dnp.metamate.me/Families/" + familyId);
+                await client.DeleteAsync("http://localhost:5003/family/" + familyId);
             Console.WriteLine(response.ToString());
         }
 
