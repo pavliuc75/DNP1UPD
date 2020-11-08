@@ -21,13 +21,13 @@ namespace DNPAssigment1.Data
             if (message.Length == 0)
             {
                 List<Family> emptyResult = new List<Family>();
+
                 return emptyResult;
             }
-            else
-            {
-                List<Family> result = JsonSerializer.Deserialize<List<Family>>(message);
-                return result;
-            }
+
+            Console.WriteLine("****received fam from serv");
+            List<Family> result = JsonSerializer.Deserialize<List<Family>>(message);
+            return result;
         }
 
         public async Task AddFamily(Family family)
@@ -40,7 +40,8 @@ namespace DNPAssigment1.Data
                 Encoding.UTF8,
                 "application/json"
             );
-            HttpResponseMessage response = await client.PostAsync("http://localhost:5003/family", stringContent);
+            HttpResponseMessage response = await client.PostAsync("https://localhost:5003/family", stringContent);
+            Console.WriteLine("add fam answer received");
             Console.WriteLine(response.ToString());
         }
 
