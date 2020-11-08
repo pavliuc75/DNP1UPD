@@ -133,7 +133,7 @@ using System.Text.Json;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 257 "C:\Users\pavli\IdeaProjects\DNP1UPD\DNPAssigment1\DNPAssigment1\Pages\Addv2.razor"
+#line 274 "C:\Users\pavli\IdeaProjects\DNP1UPD\DNPAssigment1\DNPAssigment1\Pages\Addv2.razor"
        
     string selectedAddType { get; set; } = "family"; //default value when page is loaded
     private IList<Family> Families;
@@ -210,12 +210,12 @@ using System.Text.Json;
         newAdult.Height = (int) adultHeight;
         newAdult.JobTitle = adultJob;
         newAdult.Sex = adultSex;
-        //Console.WriteLine(getJsonFormat(newAdult));
-        //Console.WriteLine(adultFamilyStreetname);
+    //Console.WriteLine(getJsonFormat(newAdult));
+    //Console.WriteLine(adultFamilyStreetname);
         var familes = await FamilyService.GetFamilies();
         var selectedFamily = familes.FirstOrDefault(i => i.StreetName.Equals(adultFamilyStreetname));
         selectedFamily.Adults.Add(newAdult);
-        //Console.WriteLine(getJsonFormat(selectedFamily));
+    //Console.WriteLine(getJsonFormat(selectedFamily));
         await FamilyService.Update(selectedFamily);
     }
 
@@ -223,36 +223,46 @@ using System.Text.Json;
     string childFirstname;
     string childLastname;
     int? childId;
-    HairColor childHairColor;
-    EyeColor childEyeColor;
+    string childHairColor = HairColor.Blond.ToString();
+    string childEyeColor = EyeColor.Black.ToString();
     int? childAge;
     int? childWeight;
     int? childHeight;
-    ChildInterest childInterest;
-    ChildInterestEnum _childInterestEnum;
+    string childSex = "Prefer not answer";
+    ChildInterest childInterest = new ChildInterest();
     List<ChildInterest> childInterestList = new List<ChildInterest>();
     string childInterestListString;
     Family childFamily = new Family();
 
     void childHairColorSelected(ChangeEventArgs e)
     {
-        childHairColor = Enum.Parse<HairColor>(e.Value.ToString());
+        childHairColor = e.Value.ToString();
     }
 
     void childEyeColorSelected(ChangeEventArgs e)
     {
-        childEyeColor = Enum.Parse<EyeColor>(e.Value.ToString());
+        childEyeColor = e.Value.ToString();
     }
 
     void childInterestSelected(ChangeEventArgs e)
     {
-        _childInterestEnum = Enum.Parse<ChildInterestEnum>(e.Value.ToString());
+        Interest interest = new Interest();
+        interest.Type = e.ToString();
+        childInterest.Interest = interest;
+    }
+
+    void childSexSelected(ChangeEventArgs e)
+    {
+        childSex = e.Value.ToString();
     }
 
     void addInterestToList()
     {
-        childInterestListString = childInterestListString + " " + _childInterestEnum.ToString();
-    //TODO:childInterestList.Add(new Interest());
+        if (childInterest.Interest.Type != null)
+        {
+            childInterestList.Add(childInterest);
+        }
+        childInterestListString = JsonSerializer.Serialize(childInterestList);
     }
 
     void childFamilySelected(ChangeEventArgs e)
