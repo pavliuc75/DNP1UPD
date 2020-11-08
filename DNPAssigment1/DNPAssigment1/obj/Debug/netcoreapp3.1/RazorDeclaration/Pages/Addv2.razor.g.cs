@@ -138,9 +138,12 @@ using System.Text.Json;
     string selectedAddType { get; set; } = "family"; //default value when page is loaded
     private IList<Family> Families;
 
+
     protected async override Task OnInitializedAsync()
     {
         Families = await FamilyService.GetFamilies();
+
+        adultFamilyStreetname = Families[0].StreetName;
     }
 
     // family----------------------------------------------------------------------------
@@ -160,14 +163,14 @@ using System.Text.Json;
     string adultFirstname;
     string adultLastname;
     int? adultId;
-    string adultHairColor;
-    string adultEyeColor;
+    string adultHairColor = HairColor.Blond.ToString(); //preselected
+    string adultEyeColor = EyeColor.Black.ToString(); //preselected
     int? adultAge;
     int? adultWeight;
     int? adultHeight;
     string adultSex = "Prefer not to answer"; //preselected
-    string adultJob;
-    Family adultFamily = new Family();
+    string adultJob = Job.Teacher.ToString(); //preselected
+    string adultFamilyStreetname; //preselected
 
     void adultHairColorSelected(ChangeEventArgs e)
     {
@@ -191,7 +194,7 @@ using System.Text.Json;
 
     void adultFamilySelected(ChangeEventArgs e)
     {
-        adultFamily = Families.FirstOrDefault(i => i.StreetName.Equals(e.Value.ToString()));
+        adultFamilyStreetname = e.Value.ToString();
     }
 
     public async void addAdult()
@@ -207,9 +210,13 @@ using System.Text.Json;
         newAdult.Height = (int) adultHeight;
         newAdult.JobTitle = adultJob;
         newAdult.Sex = adultSex;
-        Console.WriteLine(getJsonFormat(newAdult));
-    //var familes = await FamilyService.GetFamilies();
-    //familes.FirstOrDefault(i => i.Id == (adultFamily.Id)).Adults.Add(newAdult);
+        //Console.WriteLine(getJsonFormat(newAdult));
+        //Console.WriteLine(adultFamilyStreetname);
+        var familes = await FamilyService.GetFamilies();
+        var selectedFamily = familes.FirstOrDefault(i => i.StreetName.Equals(adultFamilyStreetname));
+        selectedFamily.Adults.Add(newAdult);
+        //Console.WriteLine(getJsonFormat(selectedFamily));
+        await FamilyService.Update(selectedFamily);
     }
 
     // child----------------------------------------------------------------------------
@@ -297,6 +304,7 @@ using System.Text.Json;
         families.FirstOrDefault(i => i.Id == (petFamily.Id)).Pets.Add(newPet);
     }
 
+    //for testing
     string getJsonFormat(Object obj)
     {
         return JsonSerializer.Serialize(obj);

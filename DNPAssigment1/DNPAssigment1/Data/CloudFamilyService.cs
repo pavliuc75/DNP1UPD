@@ -63,7 +63,7 @@ namespace DNPAssigment1.Data
                 Encoding.UTF8,
                 "application/json"
             );
-            HttpResponseMessage response = await client.PatchAsync("http://dnp.metamate.me/familes", stringContent);
+            HttpResponseMessage response = await client.PatchAsync("https://localhost:5003/family", stringContent);
             Console.WriteLine(response);
         }
 

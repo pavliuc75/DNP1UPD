@@ -95,7 +95,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label>Sex</label>
-                    <select class="form-control" @onchange="adultSexSelected">
+                    <select class="form-control" @onchange="adultSexSelected" style="background-color: #f7f7f7">
                         <option value="Prefer not to answer">Prefer not to answer</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -258,9 +258,12 @@
     string selectedAddType { get; set; } = "family"; //default value when page is loaded
     private IList<Family> Families;
 
+
     protected async override Task OnInitializedAsync()
     {
         Families = await FamilyService.GetFamilies();
+
+        adultFamilyStreetname = Families[0].StreetName;
     }
 
     // family----------------------------------------------------------------------------
@@ -280,14 +283,14 @@
     string adultFirstname;
     string adultLastname;
     int? adultId;
-    string adultHairColor;
-    string adultEyeColor;
+    string adultHairColor = HairColor.Blond.ToString(); //preselected
+    string adultEyeColor = EyeColor.Black.ToString(); //preselected
     int? adultAge;
     int? adultWeight;
     int? adultHeight;
     string adultSex = "Prefer not to answer"; //preselected
-    string adultJob;
-    Family adultFamily = new Family();
+    string adultJob = Job.Teacher.ToString(); //preselected
+    string adultFamilyStreetname; //preselected
 
     void adultHairColorSelected(ChangeEventArgs e)
     {
@@ -311,7 +314,7 @@
 
     void adultFamilySelected(ChangeEventArgs e)
     {
-        adultFamily = Families.FirstOrDefault(i => i.StreetName.Equals(e.Value.ToString()));
+        adultFamilyStreetname = e.Value.ToString();
     }
 
     public async void addAdult()
@@ -327,9 +330,13 @@
         newAdult.Height = (int) adultHeight;
         newAdult.JobTitle = adultJob;
         newAdult.Sex = adultSex;
-        Console.WriteLine(getJsonFormat(newAdult));
-    //var familes = await FamilyService.GetFamilies();
-    //familes.FirstOrDefault(i => i.Id == (adultFamily.Id)).Adults.Add(newAdult);
+        //Console.WriteLine(getJsonFormat(newAdult));
+        //Console.WriteLine(adultFamilyStreetname);
+        var familes = await FamilyService.GetFamilies();
+        var selectedFamily = familes.FirstOrDefault(i => i.StreetName.Equals(adultFamilyStreetname));
+        selectedFamily.Adults.Add(newAdult);
+        //Console.WriteLine(getJsonFormat(selectedFamily));
+        await FamilyService.Update(selectedFamily);
     }
 
     // child----------------------------------------------------------------------------
