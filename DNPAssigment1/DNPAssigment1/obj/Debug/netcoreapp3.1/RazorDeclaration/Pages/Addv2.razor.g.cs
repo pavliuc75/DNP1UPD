@@ -117,6 +117,13 @@ using global::Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Users\pavli\IdeaProjects\DNP1UPD\DNPAssigment1\DNPAssigment1\Pages\Addv2.razor"
+using System.Text.Json;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/Addv2")]
     public partial class Addv2 : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -126,7 +133,7 @@ using global::Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 248 "C:\Users\pavli\IdeaProjects\DNP1UPD\DNPAssigment1\DNPAssigment1\Pages\Addv2.razor"
+#line 257 "C:\Users\pavli\IdeaProjects\DNP1UPD\DNPAssigment1\DNPAssigment1\Pages\Addv2.razor"
        
     string selectedAddType { get; set; } = "family"; //default value when page is loaded
     private IList<Family> Families;
@@ -153,32 +160,38 @@ using global::Models;
     string adultFirstname;
     string adultLastname;
     int? adultId;
-    HairColor adultHairColor;
-    EyeColor adultEyeColor;
+    string adultHairColor;
+    string adultEyeColor;
     int? adultAge;
     int? adultWeight;
     int? adultHeight;
-    Job adultJob;
+    string adultSex = "Prefer not to answer"; //preselected
+    string adultJob;
     Family adultFamily = new Family();
 
     void adultHairColorSelected(ChangeEventArgs e)
     {
-        adultHairColor = Enum.Parse<HairColor>(e.Value.ToString());
+        adultHairColor = e.Value.ToString();
     }
 
     void adultEyeColorSelected(ChangeEventArgs e)
     {
-        adultEyeColor = Enum.Parse<EyeColor>(e.Value.ToString());
+        adultEyeColor = e.Value.ToString();
+    }
+
+    void adultSexSelected(ChangeEventArgs e)
+    {
+        adultSex = e.Value.ToString();
     }
 
     void adultJobSelected(ChangeEventArgs e)
     {
-        adultJob = Enum.Parse<Job>(e.Value.ToString());
+        adultJob = e.Value.ToString();
     }
 
     void adultFamilySelected(ChangeEventArgs e)
     {
-        adultFamily = Families.FirstOrDefault(i => i.Id == (int) e.Value);
+        adultFamily = Families.FirstOrDefault(i => i.StreetName.Equals(e.Value.ToString()));
     }
 
     public async void addAdult()
@@ -187,14 +200,16 @@ using global::Models;
         newAdult.FirstName = adultFirstname;
         newAdult.LastName = adultLastname;
         newAdult.Id = (int) adultId;
-        newAdult.HairColor = adultHairColor.ToString();
-        newAdult.EyeColor = adultEyeColor.ToString();
+        newAdult.HairColor = adultHairColor;
+        newAdult.EyeColor = adultEyeColor;
         newAdult.Age = (int) adultAge;
         newAdult.Weight = (int) adultWeight;
         newAdult.Height = (int) adultHeight;
-        newAdult.JobTitle = adultJob.ToString();
-        var familes = await FamilyService.GetFamilies();
-        familes.FirstOrDefault(i => i.Id == (adultFamily.Id)).Adults.Add(newAdult);
+        newAdult.JobTitle = adultJob;
+        newAdult.Sex = adultSex;
+        Console.WriteLine(getJsonFormat(newAdult));
+    //var familes = await FamilyService.GetFamilies();
+    //familes.FirstOrDefault(i => i.Id == (adultFamily.Id)).Adults.Add(newAdult);
     }
 
     // child----------------------------------------------------------------------------
@@ -280,6 +295,11 @@ using global::Models;
         newPet.Species = petSpecies.ToString();
         var families = await FamilyService.GetFamilies();
         families.FirstOrDefault(i => i.Id == (petFamily.Id)).Pets.Add(newPet);
+    }
+
+    string getJsonFormat(Object obj)
+    {
+        return JsonSerializer.Serialize(obj);
     }
 
 

@@ -2,6 +2,7 @@
 @using DNPAssigment1.Data
 @using DNPAssigment1.Models
 @using global::Models
+@using System.Text.Json
 @inject IFamilyService FamilyService;
 
 <form>
@@ -80,17 +81,25 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label>Age</label>
                     <input class="form-control" placeholder="Age" @bind="adultAge">
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label>Weight</label>
                     <input class="form-control" placeholder="Weight (kg)" @bind="adultWeight">
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label>Height</label>
                     <input class="form-control" placeholder="Height (cm)" @bind="adultHeight">
+                </div>
+                <div class="form-group col-md-3">
+                    <label>Sex</label>
+                    <select class="form-control" @onchange="adultSexSelected">
+                        <option value="Prefer not to answer">Prefer not to answer</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
                 </div>
             </div>
             <div class="form-row">
@@ -104,11 +113,11 @@
                     </select>
                 </div>
                 <div class="form-group col-md-6">
-                    <label>Family</label>
+                    <label>Family (street)</label>
                     <select class="form-control" @onchange="adultFamilySelected" style="background-color: #f7f7f7">
                         @foreach (var family in Families)
                         {
-                            <option value="@family.Id">@family.Id</option>
+                            <option value="@family.StreetName">@family.StreetName</option>
                         }
                     </select>
                 </div>
@@ -271,32 +280,38 @@
     string adultFirstname;
     string adultLastname;
     int? adultId;
-    HairColor adultHairColor;
-    EyeColor adultEyeColor;
+    string adultHairColor;
+    string adultEyeColor;
     int? adultAge;
     int? adultWeight;
     int? adultHeight;
-    Job adultJob;
+    string adultSex = "Prefer not to answer"; //preselected
+    string adultJob;
     Family adultFamily = new Family();
 
     void adultHairColorSelected(ChangeEventArgs e)
     {
-        adultHairColor = Enum.Parse<HairColor>(e.Value.ToString());
+        adultHairColor = e.Value.ToString();
     }
 
     void adultEyeColorSelected(ChangeEventArgs e)
     {
-        adultEyeColor = Enum.Parse<EyeColor>(e.Value.ToString());
+        adultEyeColor = e.Value.ToString();
+    }
+
+    void adultSexSelected(ChangeEventArgs e)
+    {
+        adultSex = e.Value.ToString();
     }
 
     void adultJobSelected(ChangeEventArgs e)
     {
-        adultJob = Enum.Parse<Job>(e.Value.ToString());
+        adultJob = e.Value.ToString();
     }
 
     void adultFamilySelected(ChangeEventArgs e)
     {
-        adultFamily = Families.FirstOrDefault(i => i.Id == (int) e.Value);
+        adultFamily = Families.FirstOrDefault(i => i.StreetName.Equals(e.Value.ToString()));
     }
 
     public async void addAdult()
@@ -305,14 +320,16 @@
         newAdult.FirstName = adultFirstname;
         newAdult.LastName = adultLastname;
         newAdult.Id = (int) adultId;
-        newAdult.HairColor = adultHairColor.ToString();
-        newAdult.EyeColor = adultEyeColor.ToString();
+        newAdult.HairColor = adultHairColor;
+        newAdult.EyeColor = adultEyeColor;
         newAdult.Age = (int) adultAge;
         newAdult.Weight = (int) adultWeight;
         newAdult.Height = (int) adultHeight;
-        newAdult.JobTitle = adultJob.ToString();
-        var familes = await FamilyService.GetFamilies();
-        familes.FirstOrDefault(i => i.Id == (adultFamily.Id)).Adults.Add(newAdult);
+        newAdult.JobTitle = adultJob;
+        newAdult.Sex = adultSex;
+        Console.WriteLine(getJsonFormat(newAdult));
+    //var familes = await FamilyService.GetFamilies();
+    //familes.FirstOrDefault(i => i.Id == (adultFamily.Id)).Adults.Add(newAdult);
     }
 
     // child----------------------------------------------------------------------------
@@ -398,6 +415,12 @@
         newPet.Species = petSpecies.ToString();
         var families = await FamilyService.GetFamilies();
         families.FirstOrDefault(i => i.Id == (petFamily.Id)).Pets.Add(newPet);
+    }
+
+    //for testing
+    string getJsonFormat(Object obj)
+    {
+        return JsonSerializer.Serialize(obj);
     }
 
 
