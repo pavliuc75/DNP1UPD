@@ -25,7 +25,7 @@ namespace DNPAssigment1.Data
                 return emptyResult;
             }
 
-            Console.WriteLine("****received fam from serv");
+            //Console.WriteLine("****received fam from serv");
             List<Family> result = JsonSerializer.Deserialize<List<Family>>(message);
             return result;
         }
@@ -49,7 +49,7 @@ namespace DNPAssigment1.Data
         {
             HttpClient client = new HttpClient();
             HttpResponseMessage response =
-                await client.DeleteAsync("http://localhost:5003/family/" + familyId);
+                await client.DeleteAsync("https://localhost:5003/family/" + familyId);
             Console.WriteLine(response.ToString());
         }
 
@@ -57,13 +57,15 @@ namespace DNPAssigment1.Data
         {
             HttpClient client = new HttpClient();
             string serializedFamily = JsonSerializer.Serialize(family);
+            Console.WriteLine(serializedFamily);
 
             StringContent stringContent = new StringContent(
                 serializedFamily,
                 Encoding.UTF8,
                 "application/json"
             );
-            HttpResponseMessage response = await client.PatchAsync("https://localhost:5003/family", stringContent);
+            HttpResponseMessage response =
+                await client.PatchAsync("https://localhost:5003/family/" + family.Id, stringContent);
             Console.WriteLine(response);
         }
 
