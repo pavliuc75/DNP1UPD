@@ -259,21 +259,12 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col">
                     <label>Family</label>
                     <select class="form-control" @onchange="petFamilySelected" style="background-color: #f7f7f7">
                         @foreach (var family in Families)
                         {
-                            <option value="@family.Id">@family.Id</option>
-                        }
-                    </select>
-                </div>
-                <div class="form-group col-md-6">
-                    <label>Child</label>
-                    <select class="form-control" @onchange="petFamilySelected" style="background-color: #f7f7f7">
-                        @foreach (var family in Families)
-                        {
-                            <option value="@family.Id">@family.Id</option>
+                            <option value="@family.StreetName">@family.StreetName</option>
                         }
                     </select>
                 </div>
@@ -304,6 +295,7 @@
         {
             adultFamilyStreetname = Families[0].StreetName;
             childFamilyStreetname = Families[0].StreetName;
+            petFamilyStreetname = Families[0].StreetName;
         }
         else adultFamilyStreetname = "Empty";
 
@@ -400,7 +392,6 @@
     ChildInterest childInterest;
     List<ChildInterest> childInterestList = new List<ChildInterest>();
     string childInterestListString = "";
-    Family childFamily = new Family();
 
     void childHairColorSelected(ChangeEventArgs e)
     {
@@ -446,8 +437,8 @@
         newChild.Weight = (int) childWeight;
         newChild.Height = (int) childHeight;
         newChild.Sex = childSex;
-        
-        //TODO something wrong with childInterestList
+
+    //TODO something wrong with childInterestList (not essential)
         newChild.ChildInterests = childInterestList;
         var familes = await FamilyService.GetFamilies();
         var selectedFamily = familes.FirstOrDefault(i => i.StreetName.Equals(childFamilyStreetname));
@@ -456,20 +447,21 @@
     }
 
     //pet---------------------------------------------------------------------------------------------------------------------
-    PetSpecies petSpecies;
+    string petSpecies = PetSpecies.Hamster.ToString(); //preselected
     string petName;
     int? petAge;
+    string petFamilyStreetname; //preselected
     Family petFamily = new Family();
 
 
     void petSpeciesSelected(ChangeEventArgs e)
     {
-        petSpecies = Enum.Parse<PetSpecies>(e.Value.ToString());
+        petSpecies = e.Value.ToString();
     }
 
     void petFamilySelected(ChangeEventArgs e)
     {
-        petFamily = Families.FirstOrDefault(i => i.Id == (int) e.Value);
+        petFamilyStreetname = e.Value.ToString();
     }
 
     async void addPet()
@@ -477,9 +469,12 @@
         Pet newPet = new Pet();
         newPet.Name = petName;
         newPet.Age = (int) petAge;
-        newPet.Species = petSpecies.ToString();
+        newPet.Species = petSpecies;
+
         var families = await FamilyService.GetFamilies();
-        families.FirstOrDefault(i => i.Id == (petFamily.Id)).Pets.Add(newPet);
+        var selectedFamily = families.FirstOrDefault(i => i.StreetName.Equals(petFamilyStreetname));
+        selectedFamily.Pets.Add(newPet);
+        await FamilyService.Update(selectedFamily);
     }
 
     //for testing

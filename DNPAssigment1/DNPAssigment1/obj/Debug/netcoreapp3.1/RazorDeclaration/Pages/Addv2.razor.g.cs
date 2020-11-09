@@ -133,7 +133,7 @@ using System.Text.Json;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 294 "C:\Users\pavli\IdeaProjects\DNP1UPD\DNPAssigment1\DNPAssigment1\Pages\Addv2.razor"
+#line 285 "C:\Users\pavli\IdeaProjects\DNP1UPD\DNPAssigment1\DNPAssigment1\Pages\Addv2.razor"
        
     string selectedAddType { get; set; } = "family"; //default value when page is loaded
     private IList<Family> Families;
@@ -147,6 +147,7 @@ using System.Text.Json;
         {
             adultFamilyStreetname = Families[0].StreetName;
             childFamilyStreetname = Families[0].StreetName;
+            petFamilyStreetname = Families[0].StreetName;
         }
         else adultFamilyStreetname = "Empty";
 
@@ -243,7 +244,6 @@ using System.Text.Json;
     ChildInterest childInterest;
     List<ChildInterest> childInterestList = new List<ChildInterest>();
     string childInterestListString = "";
-    Family childFamily = new Family();
 
     void childHairColorSelected(ChangeEventArgs e)
     {
@@ -289,6 +289,8 @@ using System.Text.Json;
         newChild.Weight = (int) childWeight;
         newChild.Height = (int) childHeight;
         newChild.Sex = childSex;
+
+    //TODO something wrong with childInterestList (not essential)
         newChild.ChildInterests = childInterestList;
         var familes = await FamilyService.GetFamilies();
         var selectedFamily = familes.FirstOrDefault(i => i.StreetName.Equals(childFamilyStreetname));
@@ -297,20 +299,21 @@ using System.Text.Json;
     }
 
     //pet---------------------------------------------------------------------------------------------------------------------
-    PetSpecies petSpecies;
+    string petSpecies = PetSpecies.Hamster.ToString(); //preselected
     string petName;
     int? petAge;
+    string petFamilyStreetname; //preselected
     Family petFamily = new Family();
 
 
     void petSpeciesSelected(ChangeEventArgs e)
     {
-        petSpecies = Enum.Parse<PetSpecies>(e.Value.ToString());
+        petSpecies = e.Value.ToString();
     }
 
     void petFamilySelected(ChangeEventArgs e)
     {
-        petFamily = Families.FirstOrDefault(i => i.Id == (int) e.Value);
+        petFamilyStreetname = e.Value.ToString();
     }
 
     async void addPet()
@@ -318,9 +321,12 @@ using System.Text.Json;
         Pet newPet = new Pet();
         newPet.Name = petName;
         newPet.Age = (int) petAge;
-        newPet.Species = petSpecies.ToString();
+        newPet.Species = petSpecies;
+
         var families = await FamilyService.GetFamilies();
-        families.FirstOrDefault(i => i.Id == (petFamily.Id)).Pets.Add(newPet);
+        var selectedFamily = families.FirstOrDefault(i => i.StreetName.Equals(petFamilyStreetname));
+        selectedFamily.Pets.Add(newPet);
+        await FamilyService.Update(selectedFamily);
     }
 
     //for testing
