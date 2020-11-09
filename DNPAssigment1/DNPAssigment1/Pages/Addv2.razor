@@ -280,7 +280,11 @@
     {
         Families = await FamilyService.GetFamilies();
 
-        adultFamilyStreetname = Families[0].StreetName;
+        if (Families.Count > 0)
+        {
+            adultFamilyStreetname = Families[0].StreetName;
+        }
+        else adultFamilyStreetname = "Empty";
     }
 
     // family----------------------------------------------------------------------------

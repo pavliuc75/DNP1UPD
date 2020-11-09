@@ -24,10 +24,11 @@ namespace DNPAssigment1.Data
 
                 return emptyResult;
             }
-
-            //Console.WriteLine("****received fam from serv");
-            List<Family> result = JsonSerializer.Deserialize<List<Family>>(message);
-            return result;
+            else
+            {
+                List<Family> result = JsonSerializer.Deserialize<List<Family>>(message);
+                return result;
+            }
         }
 
         public async Task AddFamily(Family family)
