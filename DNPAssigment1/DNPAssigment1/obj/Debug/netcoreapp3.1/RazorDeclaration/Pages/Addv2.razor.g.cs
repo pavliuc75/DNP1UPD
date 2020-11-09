@@ -167,8 +167,8 @@ using System.Text.Json;
     string adultFirstname;
     string adultLastname;
     int? adultId;
-    string adultHairColor = HairColor.Blond.ToString(); //preselected
-    string adultEyeColor = EyeColor.Black.ToString(); //preselected
+    string adultHairColor = (HairColor.Blond.ToString()).ToLower(); //preselected
+    string adultEyeColor = EyeColor.Brown.ToString().ToLower(); //preselected
     int? adultAge;
     int? adultWeight;
     int? adultHeight;
@@ -178,12 +178,12 @@ using System.Text.Json;
 
     void adultHairColorSelected(ChangeEventArgs e)
     {
-        adultHairColor = e.Value.ToString();
+        adultHairColor = (e.Value.ToString()).ToLower();
     }
 
     void adultEyeColorSelected(ChangeEventArgs e)
     {
-        adultEyeColor = e.Value.ToString();
+        adultEyeColor = (e.Value.ToString()).ToLower();
     }
 
     void adultSexSelected(ChangeEventArgs e)
@@ -227,8 +227,8 @@ using System.Text.Json;
     string childFirstname;
     string childLastname;
     int? childId;
-    string childHairColor = HairColor.Blond.ToString();
-    string childEyeColor = EyeColor.Black.ToString();
+    string childHairColor = (HairColor.Blond.ToString()).ToLower();
+    string childEyeColor = EyeColor.Brown.ToString().ToLower();
     int? childAge;
     int? childWeight;
     int? childHeight;

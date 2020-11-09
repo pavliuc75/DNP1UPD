@@ -2,7 +2,6 @@
 {
     public enum EyeColor
     {
-        Black,
         Brown,
         Grey,
         Green,
