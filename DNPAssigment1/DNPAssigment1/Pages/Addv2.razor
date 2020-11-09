@@ -28,16 +28,21 @@
             <div class="form-row">
                 <div class="form-group col">
                     <label>Street name</label>
-                    <input class="form-control" placeholder="Street name" @bind="familyStreetName">
+                    <input class="form-control" placeholder="Street name [Required]" @bind="familyStreetName">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col">
                     <label>House number</label>
-                    <input class="form-control" placeholder="House number" @bind="familyHouseNumber">
+                    <input class="form-control" placeholder="House number [Required]" @bind="familyHouseNumber">
                 </div>
             </div>
             <button class="btn btn-outline-dark btn-sm" @onclick="addFamily">Add family</button>
+            <label style="color: red">
+                <b>
+                    <i>No validation available yet! Please fill in correctly!</i>
+                </b>
+            </label>
         </form>
         break;
     }
@@ -47,11 +52,11 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>First name</label>
-                    <input class="form-control" placeholder="First name" @bind="adultFirstname">
+                    <input class="form-control" placeholder="First name [NotNull]" @bind="adultFirstname">
                 </div>
                 <div class="form-group col-md-6">
                     <label>Last name</label>
-                    <input class="form-control" placeholder="Last name" @bind="adultLastname">
+                    <input class="form-control" placeholder="Last name [NotNull]" @bind="adultLastname">
                 </div>
             </div>
             <div class="form-row">
@@ -83,15 +88,15 @@
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label>Age</label>
-                    <input class="form-control" placeholder="Age (0-125)" @bind="adultAge">
+                    <input class="form-control" placeholder="Age (0-125) [NotNull]" @bind="adultAge">
                 </div>
                 <div class="form-group col-md-3">
                     <label>Weight</label>
-                    <input class="form-control" placeholder="Weight (1-250) [kg]" @bind="adultWeight">
+                    <input class="form-control" placeholder="Weight (1-250) [kg] [NotNull]" @bind="adultWeight">
                 </div>
                 <div class="form-group col-md-3">
                     <label>Height</label>
-                    <input class="form-control" placeholder="Height (30-250) [cm]" @bind="adultHeight">
+                    <input class="form-control" placeholder="Height (30-250) [cm] [NotNull]" @bind="adultHeight">
                 </div>
                 <div class="form-group col-md-3">
                     <label>Sex</label>
@@ -123,6 +128,11 @@
                 </div>
             </div>
             <button class="btn btn-outline-dark btn-sm" @onclick="addAdult">Add adult</button>
+            <label style="color: red">
+                <b>
+                    <i>No validation available yet! Please fill in correctly!</i>
+                </b>
+            </label>
         </form>
         break;
     }
@@ -132,11 +142,11 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>First name</label>
-                    <input class="form-control" placeholder="First name" @bind="childFirstname">
+                    <input class="form-control" placeholder="First name [NotNull]" @bind="childFirstname">
                 </div>
                 <div class="form-group col-md-6">
                     <label>Last name</label>
-                    <input class="form-control" placeholder="Last name" @bind="childLastname">
+                    <input class="form-control" placeholder="Last name [NotNull]" @bind="childLastname">
                 </div>
             </div>
             <div class="form-row">
@@ -168,15 +178,15 @@
             <div class="form-row">
                 <div class="form-group col-md-3">
                     <label>Age</label>
-                    <input class="form-control" placeholder="Age (0-125)" @bind="childAge">
+                    <input class="form-control" placeholder="Age (0-125) [NotNull]" @bind="childAge">
                 </div>
                 <div class="form-group col-md-3">
                     <label>Weight</label>
-                    <input class="form-control" placeholder="Weight (1-250) [kg]" @bind="childWeight">
+                    <input class="form-control" placeholder="Weight (1-250) [kg] [NotNull]" @bind="childWeight">
                 </div>
                 <div class="form-group col-md-3">
                     <label>Height</label>
-                    <input class="form-control" placeholder="Height (30-250) [cm]" @bind="childHeight">
+                    <input class="form-control" placeholder="Height (30-250) [cm] [NotNull]" @bind="childHeight">
                 </div>
                 <div class="form-group col-md-3">
                     <label>Sex</label>
@@ -210,13 +220,18 @@
                     <select class="form-control" @onchange="childFamilySelected" style="background-color: #f7f7f7">
                         @foreach (var family in Families)
                         {
-                            <option value="@family.Id">@family.Id</option>
+                            <option value="@family.StreetName">@family.StreetName</option>
                         }
                     </select>
                 </div>
             </div>
         </form>
         <button class="btn btn-outline-dark btn-sm" style="margin-bottom: 1%" @onclick="addChild">Add child</button>
+        <label style="color: red">
+            <b>
+                <i>No validation available yet! Please fill in correctly!</i>
+            </b>
+        </label>
         break;
     }
     case "pet":
@@ -225,11 +240,11 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>Name</label>
-                    <input class="form-control" placeholder="Name" @bind="petName">
+                    <input class="form-control" placeholder="Name [Required]" @bind="petName">
                 </div>
                 <div class="form-group col-md-6">
                     <label>Age</label>
-                    <input class="form-control" placeholder="Age" @bind="petAge">
+                    <input class="form-control" placeholder="Age [Required]" @bind="petAge">
                 </div>
             </div>
             <div class="form-row">
@@ -264,6 +279,11 @@
                 </div>
             </div>
             <button class="btn btn-outline-dark btn-sm" @onclick="addPet">Add pet</button>
+            <label style="color: red">
+                <b>
+                    <i>No validation available yet! Please fill in correctly!</i>
+                </b>
+            </label>
         </form>
         break;
     }
@@ -283,8 +303,12 @@
         if (Families.Count > 0)
         {
             adultFamilyStreetname = Families[0].StreetName;
+            childFamilyStreetname = Families[0].StreetName;
         }
         else adultFamilyStreetname = "Empty";
+
+        childInterest = new ChildInterest();
+        childInterest.InterestId = "Soccer";
     }
 
     // family----------------------------------------------------------------------------
@@ -297,6 +321,8 @@
         Family newFamily = new Family();
         newFamily.HouseNumber = (int) familyHouseNumber;
         newFamily.StreetName = familyStreetName;
+        newFamily.Children = new List<Child>();
+        newFamily.Pets = new List<Pet>();
         FamilyService.AddFamily(newFamily);
     }
 
@@ -364,32 +390,32 @@
     string childFirstname;
     string childLastname;
     int? childId;
-    string childHairColor = (HairColor.Blond.ToString()).ToLower();
-    string childEyeColor = EyeColor.Brown.ToString().ToLower();
+    string childHairColor = HairColor.Blond.ToString().ToLower(); //preselected
+    string childEyeColor = EyeColor.Brown.ToString().ToLower(); //preselected
     int? childAge;
     int? childWeight;
     int? childHeight;
-    string childSex = "Prefer not answer";
-    ChildInterest childInterest = new ChildInterest();
+    string childSex = "Prefer not answer"; //preselected
+    string childFamilyStreetname; //preselected
+    ChildInterest childInterest;
     List<ChildInterest> childInterestList = new List<ChildInterest>();
-    string childInterestListString;
+    string childInterestListString = "";
     Family childFamily = new Family();
 
     void childHairColorSelected(ChangeEventArgs e)
     {
-        childHairColor = e.Value.ToString();
+        childHairColor = e.Value.ToString().ToLower();
     }
 
     void childEyeColorSelected(ChangeEventArgs e)
     {
-        childEyeColor = e.Value.ToString();
+        childEyeColor = e.Value.ToString().ToLower();
     }
 
     void childInterestSelected(ChangeEventArgs e)
     {
-        Interest interest = new Interest();
-        interest.Type = e.ToString();
-        childInterest.Interest = interest;
+        string interestId = e.Value.ToString();
+        childInterest.InterestId = interestId;
     }
 
     void childSexSelected(ChangeEventArgs e)
@@ -397,20 +423,16 @@
         childSex = e.Value.ToString();
     }
 
-    void addInterestToList()
-    {
-        if (childInterest.Interest.Type != null)
-        {
-            childInterestList.Add(childInterest);
-        }
-        childInterestListString = JsonSerializer.Serialize(childInterestList);
-    }
-
     void childFamilySelected(ChangeEventArgs e)
     {
-        childFamily = Families.FirstOrDefault(i => i.Id == (int) e.Value);
+        childFamilyStreetname = e.Value.ToString();
     }
 
+    void addInterestToList()
+    {
+        childInterestList.Add(childInterest);
+        childInterestListString = JsonSerializer.Serialize(childInterestList);
+    }
 
     public async void addChild()
     {
@@ -418,14 +440,19 @@
         newChild.FirstName = childFirstname;
         newChild.LastName = childLastname;
         newChild.Id = (int) childId;
-        newChild.HairColor = childHairColor.ToString();
-        newChild.EyeColor = childEyeColor.ToString();
+        newChild.HairColor = childHairColor;
+        newChild.EyeColor = childEyeColor;
         newChild.Age = (int) childAge;
         newChild.Weight = (int) childWeight;
         newChild.Height = (int) childHeight;
+        newChild.Sex = childSex;
+        
+        //TODO something wrong with childInterestList
         newChild.ChildInterests = childInterestList;
-        var families = await FamilyService.GetFamilies();
-        families.FirstOrDefault(i => i.Id == childFamily.Id).Children.Add(newChild);
+        var familes = await FamilyService.GetFamilies();
+        var selectedFamily = familes.FirstOrDefault(i => i.StreetName.Equals(childFamilyStreetname));
+        selectedFamily.Children.Add(newChild);
+        await FamilyService.Update(selectedFamily);
     }
 
     //pet---------------------------------------------------------------------------------------------------------------------

@@ -47,6 +47,7 @@ else
             <th>Weight</th>
             <th>Height</th>
             <th>Job</th>
+            <th>Sex</th>
         </tr>
         </thead>
         <tbody>
@@ -62,6 +63,7 @@ else
                 <td>@adult.Weight</td>
                 <td>@adult.Height</td>
                 <td>@adult.JobTitle</td>
+                <td>@adult.Sex</td>
             </tr>
         }
         </tbody>
@@ -89,6 +91,7 @@ else
             <th>Age</th>
             <th>Weight</th>
             <th>Height</th>
+            <th>Sex</th>
         </tr>
         </thead>
         <tbody>
@@ -103,6 +106,7 @@ else
                 <td>@child.Age</td>
                 <td>@child.Weight</td>
                 <td>@child.Height</td>
+                <td>@child.Sex</td>
             </tr>
         }
         </tbody>
@@ -145,7 +149,21 @@ else
 
     protected async override Task OnInitializedAsync()
     {
-        selectedFam =  FamilyService.getSelectedFamily();
+        selectedFam = FamilyService.getSelectedFamily();
     }
+
+    /*
+    string getChildInterstList(List<ChildInterest> interests)
+    {
+        string result = "";
+        for (int i = 0; i < interests.Count; i++)
+        {
+            
+                result = result + ", " + interests[i].InterestId;  
+            
+        }
+        return result;
+    }
+    */
 
 }

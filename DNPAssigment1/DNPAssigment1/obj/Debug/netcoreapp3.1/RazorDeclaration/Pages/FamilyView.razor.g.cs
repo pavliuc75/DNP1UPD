@@ -126,14 +126,28 @@ using global::Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 143 "C:\Users\pavli\IdeaProjects\DNP1UPD\DNPAssigment1\DNPAssigment1\Pages\FamilyView.razor"
+#line 147 "C:\Users\pavli\IdeaProjects\DNP1UPD\DNPAssigment1\DNPAssigment1\Pages\FamilyView.razor"
        
     Family selectedFam { get; set; }
 
     protected async override Task OnInitializedAsync()
     {
-        selectedFam =  FamilyService.getSelectedFamily();
+        selectedFam = FamilyService.getSelectedFamily();
     }
+
+    /*
+    string getChildInterstList(List<ChildInterest> interests)
+    {
+        string result = "";
+        for (int i = 0; i < interests.Count; i++)
+        {
+            
+                result = result + ", " + interests[i].InterestId;  
+            
+        }
+        return result;
+    }
+    */
 
 
 #line default

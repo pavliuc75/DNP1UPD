@@ -133,7 +133,7 @@ using System.Text.Json;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 274 "C:\Users\pavli\IdeaProjects\DNP1UPD\DNPAssigment1\DNPAssigment1\Pages\Addv2.razor"
+#line 294 "C:\Users\pavli\IdeaProjects\DNP1UPD\DNPAssigment1\DNPAssigment1\Pages\Addv2.razor"
        
     string selectedAddType { get; set; } = "family"; //default value when page is loaded
     private IList<Family> Families;
@@ -146,8 +146,12 @@ using System.Text.Json;
         if (Families.Count > 0)
         {
             adultFamilyStreetname = Families[0].StreetName;
+            childFamilyStreetname = Families[0].StreetName;
         }
         else adultFamilyStreetname = "Empty";
+
+        childInterest = new ChildInterest();
+        childInterest.InterestId = "Soccer";
     }
 
     // family----------------------------------------------------------------------------
@@ -160,6 +164,8 @@ using System.Text.Json;
         Family newFamily = new Family();
         newFamily.HouseNumber = (int) familyHouseNumber;
         newFamily.StreetName = familyStreetName;
+        newFamily.Children = new List<Child>();
+        newFamily.Pets = new List<Pet>();
         FamilyService.AddFamily(newFamily);
     }
 
@@ -227,32 +233,32 @@ using System.Text.Json;
     string childFirstname;
     string childLastname;
     int? childId;
-    string childHairColor = (HairColor.Blond.ToString()).ToLower();
-    string childEyeColor = EyeColor.Brown.ToString().ToLower();
+    string childHairColor = HairColor.Blond.ToString().ToLower(); //preselected
+    string childEyeColor = EyeColor.Brown.ToString().ToLower(); //preselected
     int? childAge;
     int? childWeight;
     int? childHeight;
-    string childSex = "Prefer not answer";
-    ChildInterest childInterest = new ChildInterest();
+    string childSex = "Prefer not answer"; //preselected
+    string childFamilyStreetname; //preselected
+    ChildInterest childInterest;
     List<ChildInterest> childInterestList = new List<ChildInterest>();
-    string childInterestListString;
+    string childInterestListString = "";
     Family childFamily = new Family();
 
     void childHairColorSelected(ChangeEventArgs e)
     {
-        childHairColor = e.Value.ToString();
+        childHairColor = e.Value.ToString().ToLower();
     }
 
     void childEyeColorSelected(ChangeEventArgs e)
     {
-        childEyeColor = e.Value.ToString();
+        childEyeColor = e.Value.ToString().ToLower();
     }
 
     void childInterestSelected(ChangeEventArgs e)
     {
-        Interest interest = new Interest();
-        interest.Type = e.ToString();
-        childInterest.Interest = interest;
+        string interestId = e.Value.ToString();
+        childInterest.InterestId = interestId;
     }
 
     void childSexSelected(ChangeEventArgs e)
@@ -260,20 +266,16 @@ using System.Text.Json;
         childSex = e.Value.ToString();
     }
 
-    void addInterestToList()
-    {
-        if (childInterest.Interest.Type != null)
-        {
-            childInterestList.Add(childInterest);
-        }
-        childInterestListString = JsonSerializer.Serialize(childInterestList);
-    }
-
     void childFamilySelected(ChangeEventArgs e)
     {
-        childFamily = Families.FirstOrDefault(i => i.Id == (int) e.Value);
+        childFamilyStreetname = e.Value.ToString();
     }
 
+    void addInterestToList()
+    {
+        childInterestList.Add(childInterest);
+        childInterestListString = JsonSerializer.Serialize(childInterestList);
+    }
 
     public async void addChild()
     {
@@ -281,14 +283,17 @@ using System.Text.Json;
         newChild.FirstName = childFirstname;
         newChild.LastName = childLastname;
         newChild.Id = (int) childId;
-        newChild.HairColor = childHairColor.ToString();
-        newChild.EyeColor = childEyeColor.ToString();
+        newChild.HairColor = childHairColor;
+        newChild.EyeColor = childEyeColor;
         newChild.Age = (int) childAge;
         newChild.Weight = (int) childWeight;
         newChild.Height = (int) childHeight;
+        newChild.Sex = childSex;
         newChild.ChildInterests = childInterestList;
-        var families = await FamilyService.GetFamilies();
-        families.FirstOrDefault(i => i.Id == childFamily.Id).Children.Add(newChild);
+        var familes = await FamilyService.GetFamilies();
+        var selectedFamily = familes.FirstOrDefault(i => i.StreetName.Equals(childFamilyStreetname));
+        selectedFamily.Children.Add(newChild);
+        await FamilyService.Update(selectedFamily);
     }
 
     //pet---------------------------------------------------------------------------------------------------------------------
