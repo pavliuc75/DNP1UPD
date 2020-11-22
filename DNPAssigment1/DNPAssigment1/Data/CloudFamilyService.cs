@@ -54,6 +54,15 @@ namespace DNPAssigment1.Data
             Console.WriteLine(response.ToString());
         }
 
+        public async Task RemoveFamilyByStreetName(string streetName)
+        {
+            Console.WriteLine(streetName);
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response =
+                await client.DeleteAsync("https://localhost:5003/family/" + streetName);
+            Console.WriteLine(response.ToString());
+        }
+
         public async Task Update(Family family)
         {
             HttpClient client = new HttpClient();

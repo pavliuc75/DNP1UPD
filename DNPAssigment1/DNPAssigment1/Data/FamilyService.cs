@@ -50,6 +50,11 @@ namespace DNPAssigment1.Data
             WriteFamiliesToFile();
         }
 
+        public Task RemoveFamilyByStreetName(string streetName)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async Task Update(Family family)
         {
             Family toUpdate = families.First(f => f.Id == family.Id);

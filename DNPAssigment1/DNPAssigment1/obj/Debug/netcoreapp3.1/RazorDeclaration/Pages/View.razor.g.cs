@@ -140,12 +140,12 @@ using Microsoft.AspNetCore.Mvc.Formatters;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 73 "C:\Users\pavli\IdeaProjects\DNP1UPD\DNPAssigment1\DNPAssigment1\Pages\View.razor"
+#line 72 "C:\Users\pavli\IdeaProjects\DNP1UPD\DNPAssigment1\DNPAssigment1\Pages\View.razor"
        
     string SearchTerm { get; set; }
     private IList<Family> Families;
-    IList<Family> FilteredFamilies;// => Families != null ? 
-     //   Families.Where(i => i.Adults.First().LastName.ToLower().Contains(SearchTerm.ToLower())).ToList() : null;
+    IList<Family> FilteredFamilies; // => Families != null ? 
+    //   Families.Where(i => i.Adults.First().LastName.ToLower().Contains(SearchTerm.ToLower())).ToList() : null;
 
     protected async override Task OnInitializedAsync()
     {
@@ -159,10 +159,10 @@ using Microsoft.AspNetCore.Mvc.Formatters;
         ModalService.Show<FamilyView>("Family details:");
     }
 
-    private void RemoveFamily(int familyId)
+    private void RemoveFamily(string streetName)
     {
-        Family familyToRemove = Families.First(f => f.Id == familyId);
-        FamilyService.RemoveFamily(familyId);
+        Family familyToRemove = Families.First(f => f.StreetName.Equals(streetName));
+        FamilyService.RemoveFamilyByStreetName(streetName);
         Families.Remove(familyToRemove);
         FilteredFamilies.Remove(familyToRemove);
     }
@@ -171,6 +171,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
     {
         FilteredFamilies = Families.Where(i => i.StreetName.ToLower().Contains(searchItem.ToLower())).ToList();
     }
+
 
 #line default
 #line hidden
