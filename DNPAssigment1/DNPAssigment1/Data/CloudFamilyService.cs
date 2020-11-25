@@ -66,7 +66,7 @@ namespace DNPAssigment1.Data
                 "application/json"
             );
             HttpResponseMessage response =
-                await client.PatchAsync("https://localhost:5003/family/?streetName="+family.StreetName+"&houseNumber="+family.HouseNumber ,stringContent);
+                await client.PatchAsync("https://localhost:5003/family",stringContent);
             Console.WriteLine(response);
         }
 
