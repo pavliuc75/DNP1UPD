@@ -60,12 +60,6 @@
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col">
-                    <label>ID</label>
-                    <input class="form-control" placeholder="ID number" @bind="adultId">
-                </div>
-            </div>
-            <div class="form-row">
                 <div class="form-group col-md-6">
                     <label>Hair color</label>
                     <select class="form-control" @onchange="adultHairColorSelected" style="background-color: #f7f7f7">
@@ -147,12 +141,6 @@
                 <div class="form-group col-md-6">
                     <label>Last name</label>
                     <input class="form-control" placeholder="Last name [NotNull]" @bind="childLastname">
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col">
-                    <label>ID</label>
-                    <input class="form-control" placeholder="ID number" @bind="childId">
                 </div>
             </div>
             <div class="form-row">
@@ -321,7 +309,7 @@
     // adult----------------------------------------------------------------------------
     string adultFirstname;
     string adultLastname;
-    int? adultId;
+    //int? adultId;
     string adultHairColor = (HairColor.Blond.ToString()).ToLower(); //preselected
     string adultEyeColor = EyeColor.Brown.ToString().ToLower(); //preselected
     int? adultAge;
@@ -380,7 +368,7 @@
     // child----------------------------------------------------------------------------
     string childFirstname;
     string childLastname;
-    int? childId;
+    //int? childId;
     string childHairColor = HairColor.Blond.ToString().ToLower(); //preselected
     string childEyeColor = EyeColor.Brown.ToString().ToLower(); //preselected
     int? childAge;
@@ -429,7 +417,7 @@
         Child newChild = new Child();
         newChild.FirstName = childFirstname;
         newChild.LastName = childLastname;
-        newChild.Id = (int) childId;
+        //newChild.Id = (int) childId;
         newChild.HairColor = childHairColor;
         newChild.EyeColor = childEyeColor;
         newChild.Age = (int) childAge;
