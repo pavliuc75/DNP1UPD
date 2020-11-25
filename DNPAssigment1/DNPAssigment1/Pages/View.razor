@@ -53,7 +53,7 @@ else
                     </td>
                     <AuthorizeView Policy="SecurityLevel2">
                         <td>
-                            <button @onclick="@(() => RemoveFamily(family.StreetName))">
+                            <button @onclick="@(() => RemoveFamily(family.StreetName,family.HouseNumber))">
                                 <i class="oi oi-trash" style="color:red"/>
                             </button>
                         </td>
@@ -87,10 +87,10 @@ else
         ModalService.Show<FamilyView>("Family details:");
     }
 
-    private void RemoveFamily(string streetName)
+    private void RemoveFamily(string streetName,int houseNumber)
     {
-        Family familyToRemove = Families.First(f => f.StreetName.Equals(streetName));
-        FamilyService.RemoveFamilyByStreetName(streetName);
+        Family familyToRemove = Families.First(f => f.StreetName.Equals(streetName) && f.HouseNumber == houseNumber);
+        FamilyService.RemoveFamily(streetName,houseNumber);
         Families.Remove(familyToRemove);
         FilteredFamilies.Remove(familyToRemove);
     }

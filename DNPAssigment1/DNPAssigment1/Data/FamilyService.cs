@@ -37,27 +37,20 @@ namespace DNPAssigment1.Data
 
         public async Task AddFamily(Family family)
         {
-            int max = families.Max(family => family.Id);
-            family.Id = (++max);
             families.Add(family);
             WriteFamiliesToFile();
         }
 
-        public async Task RemoveFamily(int familyId)
+        public async Task RemoveFamily(string streetName, int houseNumber)
         {
-            Family toRemove = families.First(f => f.Id == familyId);
+            Family toRemove = families.First(f => f.StreetName.Equals(streetName) && f.HouseNumber == houseNumber);
             families.Remove(toRemove);
             WriteFamiliesToFile();
         }
-
-        public Task RemoveFamilyByStreetName(string streetName)
-        {
-            throw new System.NotImplementedException();
-        }
-
+        
         public async Task Update(Family family)
         {
-            Family toUpdate = families.First(f => f.Id == family.Id);
+            Family toUpdate = families.First(f => f.StreetName.Equals(family.StreetName) && f.HouseNumber == family.HouseNumber);
             toUpdate = family;
             WriteFamiliesToFile();
         }

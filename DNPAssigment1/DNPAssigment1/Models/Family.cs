@@ -5,8 +5,7 @@ using DNPAssigment1.Models;
 
 namespace Models {
     public class Family {
-    
-        public int Id { get; set; }
+        
         [Required]
         [JsonPropertyName("streetName")]
         public string StreetName { get; set; }

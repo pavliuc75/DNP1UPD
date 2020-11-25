@@ -46,23 +46,14 @@ namespace DNPAssigment1.Data
             Console.WriteLine(response.ToString());
         }
 
-        public async Task RemoveFamily(int familyId)
+        public async Task RemoveFamily(string streetName, int houseNumber)
         {
             HttpClient client = new HttpClient();
             HttpResponseMessage response =
-                await client.DeleteAsync("https://localhost:5003/family/" + familyId);
+                await client.DeleteAsync("https://localhost:5003/family/?streetName="+streetName+"&houseNumber="+houseNumber);
             Console.WriteLine(response.ToString());
         }
-
-        public async Task RemoveFamilyByStreetName(string streetName)
-        {
-            Console.WriteLine(streetName);
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response =
-                await client.DeleteAsync("https://localhost:5003/family/" + streetName);
-            Console.WriteLine(response.ToString());
-        }
-
+        
         public async Task Update(Family family)
         {
             HttpClient client = new HttpClient();
@@ -75,7 +66,7 @@ namespace DNPAssigment1.Data
                 "application/json"
             );
             HttpResponseMessage response =
-                await client.PatchAsync("https://localhost:5003/family/" + family.Id, stringContent);
+                await client.PatchAsync("https://localhost:5003/family/?streetName="+family.StreetName+"&houseNumber="+family.HouseNumber ,stringContent);
             Console.WriteLine(response);
         }
 

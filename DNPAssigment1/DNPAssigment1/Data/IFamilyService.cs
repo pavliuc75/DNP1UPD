@@ -12,8 +12,7 @@ namespace DNPAssigment1.Data
 
         Task AddFamily(Family family);
 
-        Task RemoveFamily(int familyId);
-        Task RemoveFamilyByStreetName(string streetName);
+        Task RemoveFamily(string streetName, int houseNumber);
 
         Task Update(Family family);
 
