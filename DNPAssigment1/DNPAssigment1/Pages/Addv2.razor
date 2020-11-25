@@ -188,6 +188,11 @@
             <div class="form-row">
                 <div class="form-group col">
                     <label>Interests</label>
+                    <label style="color: red">
+                                    <b>
+                                        <i>Do not add any interests, does not work yet!</i>
+                                    </b>
+                                </label>
                     <select class="form-control" @onchange="childInterestSelected" style="background-color: #f7f7f7">
                         @foreach (ChildInterestEnum childInterest in (ChildInterestEnum[]) Enum.GetValues(typeof(ChildInterestEnum)))
                         {
