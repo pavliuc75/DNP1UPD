@@ -382,6 +382,7 @@
     string childSex = "Prefer not answer"; //preselected
     string childFamilyStreetname; //preselected
     ChildInterest childInterest;
+    string interestId;
     List<ChildInterest> childInterestList = new List<ChildInterest>();
     string childInterestListString = "";
 
@@ -413,7 +414,9 @@
 
     void addInterestToList()
     {
-        childInterestList.Add(childInterest);
+        var temp = new ChildInterest();
+        temp.InterestId = childInterest.InterestId;
+        childInterestList.Add(temp);
         childInterestListString = JsonSerializer.Serialize(childInterestList);
     }
 
@@ -430,7 +433,10 @@
         newChild.Sex = childSex;
 
     //TODO something wrong with childInterestList (not essential)
-        newChild.ChildInterests = childInterestList;
+        foreach (var c in childInterestList)
+        {
+            newChild.ChildInterests.Add(c);
+        }
         var familes = await FamilyService.GetFamilies();
         var selectedFamily = familes.FirstOrDefault(i => i.StreetName.Equals(childFamilyStreetname));
         selectedFamily.Children.Add(newChild);

@@ -110,7 +110,7 @@ else
                 <td>@child.Sex</td>
                 @if (child.ChildInterests.Count > 0)
                 {
-                  <td>@child.ChildInterests.First().InterestId</td>
+                  <td>@GetInterests(child)</td>
                 }
                 else
                 {
