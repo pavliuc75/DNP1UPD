@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿﻿﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using DNPAssigment1.Models;
 
@@ -15,6 +15,10 @@ namespace Models {
             ChildInterests = toUpdate.ChildInterests;
             Pets = toUpdate.Pets;
         }
-
+        public Child()
+        {
+            this.ChildInterests = new List<ChildInterest>();
+        }
+        
     }
 }

@@ -92,6 +92,7 @@ else
             <th>Weight</th>
             <th>Height</th>
             <th>Sex</th>
+            <th>ChildInterests</th>
         </tr>
         </thead>
         <tbody>
@@ -107,6 +108,14 @@ else
                 <td>@child.Weight</td>
                 <td>@child.Height</td>
                 <td>@child.Sex</td>
+                @if (child.ChildInterests.Count > 0)
+                {
+                  <td>@child.ChildInterests.First().InterestId</td>
+                }
+                else
+                {
+                    <td>No given interests...</td>
+                }
             </tr>
         }
         </tbody>
@@ -150,6 +159,16 @@ else
     protected async override Task OnInitializedAsync()
     {
         selectedFam = FamilyService.getSelectedFamily();
+    }
+
+    private string GetInterests(Child child)
+    {
+        string s = "";
+        foreach (var childInterest in child.ChildInterests)
+            {
+                s += childInterest.InterestId+ " ";
+            }
+        return s;
     }
 
     /*
